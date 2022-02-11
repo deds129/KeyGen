@@ -3,7 +3,7 @@ package com.nchudinov.keygen.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+
 
 @Entity
 @Data
