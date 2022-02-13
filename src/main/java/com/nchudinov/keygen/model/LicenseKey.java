@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class LicenseKey {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false)
 	private Integer id;
 
@@ -33,4 +33,15 @@ public class LicenseKey {
 	@Column(name = "oper_system", nullable = false, length = 20)
 	private String operSystem;
 	
+	@Column(name = "key", nullable = false)
+	private String key;
+
+	public LicenseKey(String customer, String licenseType, String host, Integer port, String operSystem, String key) {
+		this.customer = customer;
+		this.licenseType = licenseType;
+		this.host = host;
+		this.port = port;
+		this.operSystem = operSystem;
+		this.key = key;
+	}
 }

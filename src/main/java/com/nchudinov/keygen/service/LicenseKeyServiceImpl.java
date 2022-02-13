@@ -11,10 +11,25 @@ import java.util.List;
 public class LicenseKeyServiceImpl implements LicenseKeyService {
 
 	@Autowired
-	LicenseKeyRepository licenseKeyRepository;
+	private LicenseKeyRepository licenseKeyRepository;
 	
 	@Override
 	public List<LicenseKey> getAllKeys() {
 		return licenseKeyRepository.findAll();
+	}
+
+	@Override
+	public void saveLicenseKey(LicenseKey licenseKey) {
+		licenseKeyRepository.save(licenseKey);
+	}
+
+	@Override
+	public LicenseKey getLicenseById(int id) {
+		return licenseKeyRepository.getById(id);
+	}
+
+	@Override
+	public void deleteLicenseById(int id) {
+		licenseKeyRepository.deleteById(id);
 	}
 }
