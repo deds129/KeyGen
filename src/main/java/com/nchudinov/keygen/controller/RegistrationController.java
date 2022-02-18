@@ -3,7 +3,6 @@ package com.nchudinov.keygen.controller;
 import com.nchudinov.keygen.model.Role;
 import com.nchudinov.keygen.model.User;
 import com.nchudinov.keygen.service.UserService;
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +19,7 @@ public class RegistrationController {
 	
 	@GetMapping("/registration")
 	public String registration(){ 
-		return "/registration";
+		return "registration";
 	}
 
 	@PostMapping("/registration")

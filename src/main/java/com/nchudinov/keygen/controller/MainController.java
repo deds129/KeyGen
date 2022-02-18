@@ -28,22 +28,16 @@ public class MainController {
 		model.addAttribute("license", licenseKey);
 		return "add_new_license";
 	}
-
-	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable("id") int id) {
-		licenseKeyService.deleteLicenseById(id);
+	
+	@PostMapping("/saveLicense")
+	public String saveLicense(@ModelAttribute("license") LicenseKey licenseKey) {
+		licenseKeyService.saveLicenseKey(licenseKey);
 		return "redirect:/";
 	}
 
-	@GetMapping("/update/{id}")
-	public String update(@PathVariable("id") int id, Model model) {
-		model.addAttribute("license", licenseKeyService.getLicenseById(id));
-		return "add_new_license";
-	}
-	
-	@PostMapping("/save")
-	public String save(@ModelAttribute("license") LicenseKey licenseKey, Model model) {
-		licenseKeyService.saveLicenseKey(licenseKey);
+	@RequestMapping("/deleteLicense")
+	public String  deleteLicense(@RequestParam("empId") int id, Model model) {
+		licenseKeyService.deleteLicenseById(id);
 		return "redirect:/";
 	}
 	

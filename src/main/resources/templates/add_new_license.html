@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="java">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/saveLicense}"
+      th:object="${license}" method="POST">
+    <div>
+        <input type="hidden" th:field="*{id}"/>
+        <br/>
+    </div>
+    <div>
+        Customer:
+        <label>
+            <input type="text" th:field="*{customer}"/>
+        </label>
+        <br/>
+    </div>
+    <div>
+        License type:
+        <label>
+            <input type="text" th:field="*{licenseType}"/>
+        </label>
+        <br/>
+
+    </div>
+    <div>
+        Host:
+        <label>
+            <input type="text" th:field="*{host}"/>
+        </label>
+        <br/>
+    </div>
+    <div>
+        Post:
+        <label>
+            <input type="number" th:field="*{port}"/>
+        </label>
+        <br/>
+    </div>
+    <div>
+        OS:
+        <label>
+            <input type="text" th:field="*{operSystem}"/>
+        </label>
+        <br/>
+    </div>
+    <div>
+        <input type="submit" value="Create"/>
+    </div>
+</form>
+
+</body>
+</html>

@@ -9,26 +9,26 @@ public class LicenseKey {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false)
+	@Column(name = "id")
 	private Integer id;
 
 
-	@Column(name = "customer", length = 50)
+	@Column(name = "customer")
 	private String customer;
 
-	@Column(name = "license_type", nullable = false, length = 50)
+	@Column(name = "license_type")
 	private String licenseType;
 
-	@Column(name = "host", nullable = false, length = 50)
+	@Column(name = "host")
 	private String host;
 
 	@Column(name = "port")
 	private Integer port;
 
-	@Column(name = "oper_system", nullable = false, length = 20)
+	@Column(name = "os")
 	private String operSystem;
 	
-	@Column(name = "key", nullable = false)
+	@Column(name = "lic_key")
 	private String key;
 
 	public LicenseKey() {

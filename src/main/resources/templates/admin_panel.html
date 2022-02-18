@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="java">
+
+<head>
+    <title>License keys</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, td, th {
+            border: 1px solid #999;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+<div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+	
+</div>
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>CUSTOMER</th>
+            <th>LICENSE TYPE</th>
+            <th>HOST</th>
+            <th>PORT</th>
+            <th>OS</th>
+            <th>Key</th>
+        </tr>
+        
+        <tr th:each="lecense, state : ${allLicenses}">
+            <td th:utext="${lecense.id}">ID</td>
+            <td th:utext="${lecense.customer}">CUSTOMER</td>
+            <td th:utext="${lecense.customer}">LICENSE TYPE</td>
+            <td th:utext="${lecense.host}">HOST</td>
+            <td th:utext="${lecense.port}">PORT</td>
+            <td th:utext="${lecense.operSystem}">OS</td>
+            <td th:utext="${lecense.key}">KEY</td>
+            <td>
+            <div>
+            <form name = "license" action="/deleteLicense" method="post">
+            <input type="submit" value="Delete"/>
+            <input type="hidden" name="licId"
+                   th:value="${lecense.id} "/>
+                </form>
+            </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+	<input type="button" value="Add"
+		   onclick="window.location.href = 'addLicense'"/>
+</div>
+
+</body>
+</html>
