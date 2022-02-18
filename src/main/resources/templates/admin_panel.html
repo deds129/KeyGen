@@ -3,7 +3,7 @@
 
 <head>
     <title>License keys</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style>
         table {
             border-collapse: collapse;
@@ -21,7 +21,7 @@
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
     </form>
-	
+
 </div>
 <div>
     <table>
@@ -33,8 +33,9 @@
             <th>PORT</th>
             <th>OS</th>
             <th>Key</th>
+            <th colspan="2" >Options</th>
         </tr>
-        
+
         <tr th:each="lecense, state : ${allLicenses}">
             <td th:utext="${lecense.id}">ID</td>
             <td th:utext="${lecense.customer}">CUSTOMER</td>
@@ -44,21 +45,30 @@
             <td th:utext="${lecense.operSystem}">OS</td>
             <td th:utext="${lecense.key}">KEY</td>
             <td>
-            <div>
-            <form name = "license" th:action="@{/deleteLicense}" method="post">
-            <input type="submit" value="Delete"/>
-            <input type="hidden" name="licId"
-                   th:value="${lecense.id}" value="Delete"/>
-                </form>
-            </div>
+                <div>
+                    <form name="license" th:action="@{/deleteLicense}" method="post">
+                        <input type="submit" value="Delete"/>
+                        <input type="hidden" name="licId"
+                               th:value="${lecense.id}" value="Delete"/>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <form name="license" th:action="@{/updateLicense}" method="post">
+                        <input type="submit" value="Update"/>
+                        <input type="hidden" name="licId"
+                               th:value="${lecense.id}" value="Update"/>
+                    </form>
+                </div>
             </td>
         </tr>
     </table>
 </div>
 
 <div>
-	<input type="button" value="Add"
-		   onclick="window.location.href = 'addLicense'"/>
+    <input type="button" value="Add"
+           onclick="window.location.href = 'addLicense'"/>
 </div>
 
 </body>

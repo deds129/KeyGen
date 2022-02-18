@@ -35,10 +35,18 @@ public class MainController {
 		return "redirect:/";
 	}
 
-	@RequestMapping("/deleteLicense")
+	@PostMapping("/deleteLicense")
 	public String  deleteLicense(@RequestParam("licId") int id, Model model) {
 		licenseKeyService.deleteLicenseById(id);
 		return "redirect:/";
+	}
+
+	@RequestMapping("/updateLicense")
+	public String  updateEmployee(@RequestParam("licId") int id, Model model) {
+		LicenseKey licenseKey = licenseKeyService.getLicenseById(id);
+		//must pass attribute with the same name
+		model.addAttribute("license", licenseKey);
+		return "add_new_license";
 	}
 	
 }
