@@ -45,10 +45,10 @@
             <td th:utext="${lecense.key}">KEY</td>
             <td>
             <div>
-            <form name = "license" action="/deleteLicense" method="post">
+            <form name = "license" th:action="@{/deleteLicense}" method="post">
             <input type="submit" value="Delete"/>
             <input type="hidden" name="licId"
-                   th:value="${lecense.id} "/>
+                   th:value="${lecense.id}" value="Delete"/>
                 </form>
             </div>
             </td>

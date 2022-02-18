@@ -36,7 +36,7 @@ public class MainController {
 	}
 
 	@RequestMapping("/deleteLicense")
-	public String  deleteLicense(@RequestParam("empId") int id, Model model) {
+	public String  deleteLicense(@RequestParam("licId") int id, Model model) {
 		licenseKeyService.deleteLicenseById(id);
 		return "redirect:/";
 	}
