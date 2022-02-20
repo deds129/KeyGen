@@ -11,8 +11,7 @@ public class LicenseKey {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Integer id;
-
-
+	
 	@Column(name = "customer")
 	private String customer;
 
@@ -30,6 +29,14 @@ public class LicenseKey {
 	
 	@Column(name = "lic_key")
 	private String key;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "usr_id")
+	private User author;
+
+	public User getAuthor() {
+		return author;
+	}
 
 	public LicenseKey() {
 	}
@@ -44,13 +51,18 @@ public class LicenseKey {
 		this.key = key;
 	}
 
-	public LicenseKey(String customer, String licenseType, String host, Integer port, String operSystem, String key) {
+	public LicenseKey(String customer, String licenseType, String host, Integer port, String operSystem, String key, User user) {
 		this.customer = customer;
 		this.licenseType = licenseType;
 		this.host = host;
 		this.port = port;
 		this.operSystem = operSystem;
 		this.key = key;
+		this.author = user;
+	}
+	
+	public String getAuthorName(){
+		return author != null ? author.getUsername() : "<none>";
 	}
 
 	public Integer getId() {
@@ -107,6 +119,14 @@ public class LicenseKey {
 
 	public void setKey(String key) {
 		this.key = key;
+	}
+
+	public User getUser() {
+		return author;
+	}
+
+	public void setUser(User user) {
+		this.author = user;
 	}
 
 	@Override

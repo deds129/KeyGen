@@ -1,8 +1,10 @@
 package com.nchudinov.keygen.controller;
 
 import com.nchudinov.keygen.model.LicenseKey;
+import com.nchudinov.keygen.model.User;
 import com.nchudinov.keygen.service.LicenseKeyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,8 @@ public class MainController {
 	}
 	
 	@PostMapping("/saveLicense")
-	public String saveLicense(@ModelAttribute("license") LicenseKey licenseKey) {
+	public String saveLicense(@AuthenticationPrincipal User user, @ModelAttribute("license") LicenseKey licenseKey) {
+		licenseKey.setUser(user);
 		licenseKeyService.saveLicenseKey(licenseKey);
 		return "redirect:/";
 	}

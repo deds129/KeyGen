@@ -27,6 +27,7 @@
     <table>
         <tr>
             <th>ID</th>
+            <th>AUTHOR</th>
             <th>CUSTOMER</th>
             <th>LICENSE TYPE</th>
             <th>HOST</th>
@@ -38,8 +39,9 @@
 
         <tr th:each="lecense, state : ${allLicenses}">
             <td th:utext="${lecense.id}">ID</td>
+            <td th:utext="${lecense.getAuthorName()}">AUTHOR</td>
             <td th:utext="${lecense.customer}">CUSTOMER</td>
-            <td th:utext="${lecense.customer}">LICENSE TYPE</td>
+            <td th:utext="${lecense.licenseType}">LICENSE TYPE</td>
             <td th:utext="${lecense.host}">HOST</td>
             <td th:utext="${lecense.port}">PORT</td>
             <td th:utext="${lecense.operSystem}">OS</td>
@@ -49,7 +51,7 @@
                     <form name="license" th:action="@{/deleteLicense}" method="post">
                         <input type="submit" value="Delete"/>
                         <input type="hidden" name="licId"
-                               th:value="${lecense.id}" value="Delete"/>
+                               th:value="${lecense.id}"/>
                     </form>
                 </div>
             </td>
@@ -58,7 +60,7 @@
                     <form name="license" th:action="@{/updateLicense}" method="post">
                         <input type="submit" value="Update"/>
                         <input type="hidden" name="licId"
-                               th:value="${lecense.id}" value="Update"/>
+                               th:value="${lecense.id}"/>
                     </form>
                 </div>
             </td>
