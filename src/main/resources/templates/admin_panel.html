@@ -1,30 +1,20 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="java">
 
-<head>
+<head th:replace="_layout :: html_head">
     <title>License keys</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <style>
-        table {
-            border-collapse: collapse;
-        }
-
-        table, td, th {
-            border: 1px solid #999;
-            padding: 5px;
-        }
-    </style>
 </head>
 
 <body>
-<div>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
 
-</div>
+
+<div th:replace="_layout :: html_navbar"></div>
+
+
+
 <div>
-    <table>
+    <table class="table table-striped">
+		<thead class="thead-light">
         <tr>
             <th>ID</th>
             <th>AUTHOR</th>
@@ -36,6 +26,7 @@
             <th>Key</th>
             <th colspan="2" >Options</th>
         </tr>
+		</thead>
 
         <tr th:each="lecense, state : ${allLicenses}">
             <td th:utext="${lecense.id}">ID</td>
@@ -45,7 +36,7 @@
             <td th:utext="${lecense.host}">HOST</td>
             <td th:utext="${lecense.port}">PORT</td>
             <td th:utext="${lecense.operSystem}">OS</td>
-            <td th:utext="${lecense.key}">KEY</td>
+            <td th:utext="${lecense.getUniqueKey()}">KEY</td>
             <td>
                 <div>
                     <form name="license" th:action="@{/deleteLicense}" method="post">

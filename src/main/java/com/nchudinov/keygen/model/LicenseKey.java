@@ -1,5 +1,7 @@
 package com.nchudinov.keygen.model;
 
+import com.nchudinov.keygen.handlers.KeyGenerator;
+
 import javax.persistence.*;
 
 
@@ -127,6 +129,10 @@ public class LicenseKey {
 
 	public void setUser(User user) {
 		this.author = user;
+	}
+	
+	public String getUniqueKey() {
+		return KeyGenerator.generateKey(this);
 	}
 
 	@Override
