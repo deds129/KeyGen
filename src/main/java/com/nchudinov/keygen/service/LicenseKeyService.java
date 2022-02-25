@@ -12,4 +12,6 @@ public interface LicenseKeyService {
 	LicenseKey getLicenseById(int id);
 	
 	void deleteLicenseById(int id);
+
+	List<LicenseKey> getKeysByCustomer(String customerName);
 }

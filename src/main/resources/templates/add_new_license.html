@@ -1,57 +1,65 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="java">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Add new License</title>
+<head th:replace="_layout :: html_head">
+	<meta charset="UTF-8">
+	<title>Add new License</title>
 </head>
-<body>
-<form th:action="@{/saveLicense}"
-      th:object="${license}" method="POST">
-    <div>
-        <input type="hidden" th:field="*{id}"/>
-        <br/>
-    </div>
-    <div>
-        Customer:
-        <label>
-            <input type="text" th:field="*{customer}"/>
-        </label>
-        <br/>
-    </div>
-    <div>
-        License type:
-        <label>
-            <input type="text" th:field="*{licenseType}"/>
-        </label>
-        <br/>
 
-    </div>
-    <div>
-        Host:
-        <label>
-            <input type="text" th:field="*{host}"/>
-        </label>
-        <br/>
-    </div>
-    <div>
-        Port:
-        <label>
-            <input type="number" th:field="*{port}"/>
-        </label>
-        <br/>
-    </div>
-    <div>
-        OS:
-        <label>
-            <input type="text" th:field="*{operSystem}"/>
-        </label>
-        <br/>
-    </div>
-    <div>
-        <input type="submit" value="Create"/>
-    </div>
-</form>
+<body>
+
+<div th:replace="_layout :: html_navbar"></div>
+
+<div>
+	<form th:action="@{/saveLicense}"
+		  th:object="${license}" method="POST">
+		<div>
+			<input type="hidden" th:field="*{id}"/>
+			<br/>
+		</div>
+		<div>
+			Customer:
+			<label>
+				<input type="text" th:field="*{customer}"/>
+			</label>
+			<br/>
+		</div>
+		
+		
+		<div>
+			License type:
+			<label>
+				<input type="text" th:field="*{licenseType}"/>
+			</label>
+			<br/>
+
+		</div>
+		<div>
+			Host:
+			<label>
+				<input type="text" th:field="*{host}"/>
+			</label>
+			<br/>
+		</div>
+		<div>
+			Port:
+			<label>
+				<input type="number" th:field="*{port}"/>
+			</label>
+			<br/>
+		</div>
+		<div>
+			OS:
+			<label>
+				<input type="text" th:field="*{operSystem}"/>
+			</label>
+			<br/>
+		</div>
+		<div>
+			<input type="submit" value="Create"/>
+		</div>
+	</form>
+</div>
 
 </body>
 </html>

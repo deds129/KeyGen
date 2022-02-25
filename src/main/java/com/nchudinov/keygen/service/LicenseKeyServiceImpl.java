@@ -32,4 +32,9 @@ public class LicenseKeyServiceImpl implements LicenseKeyService {
 	public void deleteLicenseById(int id) {
 		licenseKeyRepository.deleteById(id);
 	}
+
+	@Override
+	public List<LicenseKey> getKeysByCustomer(String customerName) {
+		return licenseKeyRepository.findLicenseKeyByCustomer(customerName);
+	}
 }

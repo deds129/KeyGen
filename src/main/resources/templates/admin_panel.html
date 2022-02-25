@@ -2,66 +2,79 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="java">
 
 <head th:replace="_layout :: html_head">
-    <title>License keys</title>
+	<title>License keys</title>
 </head>
 
 <body>
 
 
 <div th:replace="_layout :: html_navbar"></div>
-
-
-
 <div>
-    <table class="table table-striped">
-		<thead class="thead-light">
-        <tr>
-            <th>ID</th>
-            <th>AUTHOR</th>
-            <th>CUSTOMER</th>
-            <th>LICENSE TYPE</th>
-            <th>HOST</th>
-            <th>PORT</th>
-            <th>OS</th>
-            <th>Key</th>
-            <th colspan="2" >Options</th>
-        </tr>
-		</thead>
-
-        <tr th:each="lecense, state : ${allLicenses}">
-            <td th:utext="${lecense.id}">ID</td>
-            <td th:utext="${lecense.getAuthorName()}">AUTHOR</td>
-            <td th:utext="${lecense.customer}">CUSTOMER</td>
-            <td th:utext="${lecense.licenseType}">LICENSE TYPE</td>
-            <td th:utext="${lecense.host}">HOST</td>
-            <td th:utext="${lecense.port}">PORT</td>
-            <td th:utext="${lecense.operSystem}">OS</td>
-            <td th:utext="${lecense.getUniqueKey()}">KEY</td>
-            <td>
-                <div>
-                    <form name="license" th:action="@{/deleteLicense}" method="post">
-                        <input type="submit" value="Delete"/>
-                        <input type="hidden" name="licId"
-                               th:value="${lecense.id}"/>
-                    </form>
-                </div>
-            </td>
-            <td>
-                <div>
-                    <form name="license" th:action="@{/updateLicense}" method="post">
-                        <input type="submit" value="Update"/>
-                        <input type="hidden" name="licId"
-                               th:value="${lecense.id}"/>
-                    </form>
-                </div>
-            </td>
-        </tr>
-    </table>
+	<form class="form-inline" method="get">
+		<input class="form-control mr-sm-2" type="search" name="searchStr" placeholder="Search" aria-label="Search">
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	</form>
 </div>
 
 <div>
-    <input type="button" value="Add"
-           onclick="window.location.href = 'addLicense'"/>
+	<h3>Licenses</h3>
+</div>
+
+<div>
+	<table width="70%" class="table table-striped">
+		<thead class="thead-light">
+		<tr>
+			<th scope="col">ID</th>
+			<th scope="col">AUTHOR</th>
+			<th scope="col">CUSTOMER</th>
+			<th scope="col">LICENSE TYPE</th>
+			<th scope="col">HOST</th>
+			<th scope="col">PORT</th>
+			<th scope="col">OS</th>
+			<th scope="col">Key</th>
+			<th colspan="2">Options</th>
+		</tr>
+		</thead>
+
+		<tr th:each="lecense, state : ${allLicenses}">
+			<td th:utext="${lecense.id}">ID</td>
+			<td th:utext="${lecense.getAuthorName()}">AUTHOR</td>
+			<td th:utext="${lecense.customer}">CUSTOMER</td>
+			<td th:utext="${lecense.licenseType}">LICENSE TYPE</td>
+			<td th:utext="${lecense.host}">HOST</td>
+			<td th:utext="${lecense.port}">PORT</td>
+			<td th:utext="${lecense.operSystem}">OS</td>
+			<td style="white-space:nowrap;
+            			text-overflow:ellipsis;
+            			overflow: hidden;
+            			max-width:1px;" th:utext="${lecense.getUniqueKey()}">KEY
+			</td>
+			<td>
+				<div>
+					<form name="license" th:action="@{/deleteLicense}" method="post">
+						<input class="btn btn-secondary btn-sm" type="submit" value="Delete"/>
+						<input type="hidden" name="licId"
+							   th:value="${lecense.id}"/>
+					</form>
+				</div>
+			</td>
+			<td>
+				<div>
+					<form name="license" th:action="@{/updateLicense}" method="post">
+						<input class="btn btn-primary btn-sm" type="submit" value="Update"/>
+						<input type="hidden" name="licId"
+							   th:value="${lecense.id}"/>
+					</form>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div>
+	<button type="button" class="btn btn-outline-danger" onclick="window.location.href = 'addLicense'">Add new License
+		Key
+	</button>
 </div>
 
 </body>

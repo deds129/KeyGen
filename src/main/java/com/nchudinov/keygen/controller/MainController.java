@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,9 +19,17 @@ public class MainController {
 	private LicenseKeyService licenseKeyService;
 	
 	@GetMapping("/")
-	public String show(Model model) {
-		List<LicenseKey> licenseKeys =  licenseKeyService.getAllKeys();
+	public String show(@RequestParam(required = false) String searchStr, Model model) {
+		List<LicenseKey> licenseKeys = new ArrayList<>();
+		
+		if (searchStr != null && !searchStr.isEmpty()) {
+			licenseKeys = licenseKeyService.getKeysByCustomer(searchStr);
+		} else {
+			licenseKeys = licenseKeyService.getAllKeys();
+		}
+		
 		model.addAttribute("allLicenses", licenseKeys);
+		model.addAttribute("searchStr", searchStr);
 		return "admin_panel";
 	}
 
