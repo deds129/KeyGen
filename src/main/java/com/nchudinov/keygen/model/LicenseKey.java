@@ -3,6 +3,8 @@ package com.nchudinov.keygen.model;
 import com.nchudinov.keygen.handlers.KeyGenerator;
 
 import javax.persistence.*;
+import java.util.Arrays;
+import java.util.List;
 
 
 @Entity
@@ -35,13 +37,15 @@ public class LicenseKey {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usr_id")
 	private User author;
-
+	
 	public User getAuthor() {
 		return author;
 	}
 
 	public LicenseKey() {
 	}
+	
+	
 
 	public LicenseKey(Integer id, String customer, String licenseType, String host, Integer port, String operSystem, String key) {
 		this.id = id;
@@ -134,6 +138,8 @@ public class LicenseKey {
 	public String getUniqueKey() {
 		return KeyGenerator.generateKey(this);
 	}
+	
+	
 
 	@Override
 	public String toString() {

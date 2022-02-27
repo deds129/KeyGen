@@ -1,6 +1,8 @@
 package com.nchudinov.keygen.controller;
 
 import com.nchudinov.keygen.model.LicenseKey;
+import com.nchudinov.keygen.model.LicenseKeyTypes;
+import com.nchudinov.keygen.model.OperSystems;
 import com.nchudinov.keygen.model.User;
 import com.nchudinov.keygen.service.LicenseKeyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,16 @@ public class MainController {
 		model.addAttribute("allLicenses", licenseKeys);
 		model.addAttribute("searchStr", searchStr);
 		return "admin_panel";
+	}
+	
+	@ModelAttribute("licenseTypes")
+	public LicenseKeyTypes[] getLicenseTypes(){
+		return LicenseKeyTypes.values();
+	}
+
+	@ModelAttribute("operSystems")
+	public OperSystems[] getOperSystems(){
+		return OperSystems.values();
 	}
 
 	@GetMapping("/addLicense")

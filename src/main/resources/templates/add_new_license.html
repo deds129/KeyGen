@@ -13,51 +13,85 @@
 <div>
 	<form th:action="@{/saveLicense}"
 		  th:object="${license}" method="POST">
+
+		<!-- --------------------------------------------------------------------------------------- -->
 		<div>
 			<input type="hidden" th:field="*{id}"/>
 			<br/>
 		</div>
-		<div>
-			Customer:
-			<label>
-				<input type="text" th:field="*{customer}"/>
-			</label>
-			<br/>
-		</div>
-		
-		
-		<div>
-			License type:
-			<label>
-				<input type="text" th:field="*{licenseType}"/>
-			</label>
-			<br/>
 
+		<div class="card-columns">
+			<div class="card">
+				<div class="card-body">
+					<!--div class="card-header bg-transparent border">Header</div -->
+					<h5 class="card-title">Customer</h5>
+					<div class="form-group form-row">
+						<label>
+							<input class="form-control" type="text" th:field="*{customer}" placeholder="Customer Name"/>
+						</label>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="card">
+				<div class="card-body">
+					<!--div class="card-header bg-transparent border">Header</div -->
+					<h5 class="card-title">License Key Type</h5>
+					<label>Select list:
+						<select class="form-control" th:field="*{licenseType}">
+							<option th:each="type: ${licenseTypes}" th:text="${type.getTitle()}"
+									th:value="${type}"></option>
+						</select>
+					</label>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Host & Port</h5>
+					<div class="form-group form-row">
+						<label>
+							<input class="form-control" type="text" th:field="*{host}" placeholder="Host"/>
+						</label>
+					</div>
+					<div class="form-group form-row">
+						<label>
+							<input class="form-control" type="number" th:field="*{port}" placeholder="Port"/>
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Supporting OS</h5>
+					<th:block th:each="operSystem : ${operSystems}">
+						<div class="form-check">
+							<label class="form-check-label">
+								<input type="checkbox" name="*{operSystem}" th:value="${operSystem}"/>
+								<label th:text="${operSystem}"></label>
+							</label>
+						</div>
+					</th:block>
+				</div>
+			</div>
+
+			<div class="card text-center">
+				<blockquote class="blockquote
+				 mb-0">
+					<p>New CARD</p>
+					<footer class="blockquote-footer">
+						<small class="text-muted">
+							Someone famous in <cite title="Source Title">Source Title</cite>
+						</small>
+					</footer>
+				</blockquote>
+			</div>
+			<!-- ---------------------------------------------------------------- -->
 		</div>
-		<div>
-			Host:
-			<label>
-				<input type="text" th:field="*{host}"/>
-			</label>
-			<br/>
-		</div>
-		<div>
-			Port:
-			<label>
-				<input type="number" th:field="*{port}"/>
-			</label>
-			<br/>
-		</div>
-		<div>
-			OS:
-			<label>
-				<input type="text" th:field="*{operSystem}"/>
-			</label>
-			<br/>
-		</div>
-		<div>
-			<input type="submit" value="Create"/>
-		</div>
+
+		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 </div>
 
