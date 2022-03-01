@@ -27,8 +27,11 @@
 					<h5 class="card-title">Customer</h5>
 					<div class="form-group form-row">
 						<label>
-							<input class="form-control" type="text" th:field="*{customer}" placeholder="Customer Name"/>
+							<input class="form-control" type="text" th:field="*{customer}" placeholder="Customer Name" required/>
 						</label>
+						<div class="valid-feedback">
+							Looks good!
+						</div>
 					</div>
 				</div>
 			</div>
