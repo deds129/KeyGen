@@ -14,18 +14,34 @@
 	<h3>User Edit</h3>
 	
 	<form action="#"
-		  th:action="@{/update}"
+		  th:action="@{{usrId}(usrId=${user.id})}"
 		  th:object="${user}"
 		  method="post">
-		<div><label> User Name : <input type="text" name="username"/> </label></div>
-		<div><label> Password: <input type="password" name="password"/> </label></div>
+		<div>
+			<input type="hidden" th:field="${user.id}"/>
+		</div>
+		<div><label>New username : <input class="form-control" type="text" th:field="${user.username}" placeholder="New username"/></label></div>
 		
+		<div class="input-group">
+			<input type="password" class="form-control" id="pwdInput" placeholder="New password" th:field="${user.password}" aria-label="New password" aria-describedby="basic-addon2">
+			<!-- todo fix button -->
+			<div class="input-group-append">
+				<button class="btn btn-outline-secondary" onclick="myFunction()" type="button">Show Password</button>
+			</div>
+		</div>
+		
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" th:field="${user.active}" id="isActiveCheckBox">
+			<label class="form-check-label" for="isActiveCheckBox">
+				User is active
+			</label>
+		</div>
+		
+		<br>
 		<div><input type="submit" value="Save User"/></div>
 		<input type="hidden" name="user"
 			   th:value="${user}" value="Update"/>
 	</form>
-	
-	
 </div>
 
 </body>
