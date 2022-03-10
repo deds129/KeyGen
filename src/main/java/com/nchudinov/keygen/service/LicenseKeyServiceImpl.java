@@ -1,5 +1,6 @@
 package com.nchudinov.keygen.service;
 
+import com.nchudinov.keygen.handlers.KeyGenerator;
 import com.nchudinov.keygen.model.LicenseKey;
 import com.nchudinov.keygen.repository.LicenseKeyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class LicenseKeyServiceImpl implements LicenseKeyService {
 
 	@Override
 	public void saveLicenseKey(LicenseKey licenseKey) {
+		//generate unique key to entity
+		licenseKey.setKey(KeyGenerator.generateKey(licenseKey));
 		licenseKeyRepository.save(licenseKey);
 	}
 

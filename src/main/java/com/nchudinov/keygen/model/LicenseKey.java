@@ -1,10 +1,6 @@
 package com.nchudinov.keygen.model;
 
-import com.nchudinov.keygen.handlers.KeyGenerator;
-
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.List;
 
 
 @Entity
@@ -134,23 +130,15 @@ public class LicenseKey {
 	public void setUser(User user) {
 		this.author = user;
 	}
-	
-	public String getUniqueKey() {
-		return KeyGenerator.generateKey(this);
-	}
-	
-	
 
 	@Override
 	public String toString() {
-		return "LicenseKey{" +
-				"id=" + id +
-				", customer='" + customer + '\'' +
+		return "{" +
+				"customer='" + customer + '\'' +
 				", licenseType='" + licenseType + '\'' +
 				", host='" + host + '\'' +
 				", port=" + port +
 				", operSystem='" + operSystem + '\'' +
-				", key='" + key + '\'' +
 				'}';
 	}
 }

@@ -10,99 +10,106 @@
 
 <div th:replace="_layout :: html_navbar"></div>
 
-<div>
-	<form class="form-inline" method="get">
-		<input class="form-control mr-sm-2" type="search" name="searchStr" placeholder="Search" aria-label="Search">
-		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-	</form>
-</div>
 
-<div>
-	<h3>Licenses</h3>
-</div>
+	<div>
+		<h3>Licenses</h3>
+	</div>
+	<br>
+	<div>
+		<form class="form-inline" method="get">
+			<input class="form-control mr-sm-2" type="search" name="searchStr" placeholder="Search" aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Customer</button>
+		</form>
+	</div>
+	<br>
+	<div>
+		<table class="table table-striped container-fluid">
+			<thead class="thead-light">
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">AUTHOR</th>
+				<th scope="col">CUSTOMER</th>
+				<th scope="col">LICENSE TYPE</th>
+				<th scope="col">HOST</th>
+				<th scope="col">PORT</th>
+				<th scope="col">OS</th>
+				<th scope="col">KEY</th>
+				<!--todo reformat -->
+				<th></th>
+				<th colspan="3">OPTIONS</th>
+			</tr>
+			</thead>
 
-<div>
-	<table class="table table-striped container-fluid">
-		<thead class="thead-light">
-		<tr>
-			<th scope="col">ID</th>
-			<th scope="col">AUTHOR</th>
-			<th scope="col">CUSTOMER</th>
-			<th scope="col">LICENSE TYPE</th>
-			<th scope="col">HOST</th>
-			<th scope="col">PORT</th>
-			<th scope="col">OS</th>
-			<th scope="col">KEY</th>
-			<th colspan="3">OPTIONS</th>
-		</tr>
-		</thead>
-
-		<tr th:each="lecense, state : ${allLicenses}">
-			<td th:utext="${lecense.id}">ID</td>
-			<td th:utext="${lecense.getAuthorName()}">AUTHOR</td>
-			<td th:utext="${lecense.customer}">CUSTOMER</td>
-			<td th:utext="${lecense.licenseType}">LICENSE TYPE</td>
-			<td th:utext="${lecense.host}">HOST</td>
-			<td th:utext="${lecense.port}">PORT</td>
-			<td th:utext="${lecense.operSystem}">OS</td>
-			<td style="white-space:nowrap;
+			<tr th:each="lecense, state : ${allLicenses}">
+				<td th:utext="${lecense.id}">ID</td>
+				<td th:utext="${lecense.getAuthorName()}">AUTHOR</td>
+				<td th:utext="${lecense.customer}">CUSTOMER</td>
+				<td th:utext="${lecense.licenseType}">LICENSE TYPE</td>
+				<td th:utext="${lecense.host}">HOST</td>
+				<td th:utext="${lecense.port}">PORT</td>
+				<td th:utext="${lecense.operSystem}">OS</td>
+				<td style="white-space:nowrap;
             			text-overflow:ellipsis;
             			overflow: hidden;
-            			max-width:1px;" th:utext="${lecense.getUniqueKey()}">KEY
-			</td>
-			<td>
-				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
-					Show License
-				</button>
+            			max-width:1px;" th:utext="${lecense.key}">KEY
+				</td>
+				<td>
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+							th:data-target="'#modalButton' + ${lecense.id}">
+						Show License
+					</button>
 
-				<!-- Modal -->
-				<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<p style="word-break: break-all" th:utext="${lecense.getUniqueKey()}">OS</p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Save changes</button>
+					<!-- Modal -->
+					<div class="modal fade" th:id="'modalButton' + ${lecense.id}" tabindex="-1" role="dialog"
+						 aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">License Key</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p style="word-break: break-all" th:utext="${lecense.key}">Key</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Copy to clipboard</button>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</td>
-			<td>
-				<div>
-					<form name="license" th:action="@{/deleteLicense}" method="post">
-						<input class="btn btn-secondary btn-sm" type="submit" value="Delete"/>
-						<input type="hidden" name="licId"
-							   th:value="${lecense.id}"/>
-					</form>
-				</div>
-			</td>
-			<td>
-				<div>
-					<form name="license" th:action="@{/updateLicense}" method="post">
-						<input class="btn btn-primary btn-sm" type="submit" value="Update"/>
-						<input type="hidden" name="licId"
-							   th:value="${lecense.id}"/>
-					</form>
-				</div>
-			</td>
-		</tr>
-	</table>
-</div>
+				</td>
+				<td>
+					<div>
+						<form name="license" th:action="@{/deleteLicense}" method="post">
+							<input class="btn btn-danger btn-sm" type="submit" value="Delete"/>
+							<input type="hidden" name="licId"
+								   th:value="${lecense.id}"/>
+						</form>
+					</div>
+				</td>
+				<td>
+					<div>
+						<form name="license" th:action="@{/updateLicense}" method="post">
+							<input class="btn btn-primary btn-sm" type="submit" value="Update"/>
+							<input type="hidden" name="licId" th:value="${lecense.id}"/>
+						</form>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
 
-<div>
-	<button type="button" class="btn btn-outline-danger" onclick="window.location.href = 'addLicense'">Add new License
-		Key
-	</button>
+	<div>
+		<button type="button" class="btn btn-outline-danger" onclick="window.location.href = 'addLicense'">Add new
+			License
+			Key
+		</button>
+	</div>
+
 </div>
 
 </body>
