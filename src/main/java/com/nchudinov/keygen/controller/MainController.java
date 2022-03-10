@@ -55,16 +55,6 @@ public class MainController {
 	@PostMapping("/saveLicense")
 	public String saveLicense(@AuthenticationPrincipal User user, @ModelAttribute("license") LicenseKey licenseKey) {
 		licenseKey.setUser(user);
-		
-		//todo add keyGen logic
-		/*
-		if (licenseKey.key == null)
-			var =	genereteLicense()
-		licenseKey.setKey(var);
-		
-		if (one of fields was changed => regenenrate key)
-		 */
-		
 		licenseKeyService.saveLicenseKey(licenseKey);
 		return "redirect:/";
 	}
@@ -75,7 +65,7 @@ public class MainController {
 		return "redirect:/";
 	}
 
-	@RequestMapping("/updateLicense")
+	@PostMapping("/updateLicense")
 	public String  updateEmployee(@RequestParam("licId") int id, Model model) {
 		LicenseKey licenseKey = licenseKeyService.getLicenseById(id);
 		//must pass attribute with the same name

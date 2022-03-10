@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Registration Page</title>
+<head th:replace="_layout :: html_head">
+	<title>Registration Page</title>
 </head>
 <body>
 <div>Add new user</div>
@@ -11,7 +11,7 @@
     <form th:action="@{/registration}" method="post">
         <div><label> User Name : <input type="text" name="username"/> </label></div>
         <div><label> Password: <input type="password" name="password"/> </label></div>
-        <div><input type="submit" value="Add new user"/></div>
+        <div><input type="submit" value="Save User"/></div>
     </form>
 </div>
 

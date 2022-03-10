@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="java" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="_layout :: html_head">
+	<title>User Edit</title>
+</head>
+
+<body>
+
+
+<div th:replace="_layout :: html_navbar"></div>
+
+<div class="container mb-4">
+	<h3>User Edit</h3>
+	
+	<form action="#"
+		  th:action="@{/update}"
+		  th:object="${user}"
+		  method="post">
+		<div><label> User Name : <input type="text" name="username"/> </label></div>
+		<div><label> Password: <input type="password" name="password"/> </label></div>
+		
+		<div><input type="submit" value="Save User"/></div>
+		<input type="hidden" name="user"
+			   th:value="${user}" value="Update"/>
+	</form>
+	
+	
+</div>
+
+</body>
+</html>

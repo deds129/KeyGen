@@ -28,7 +28,7 @@
 			<td th:utext="${user.username}">USERNAME</td>
 			<td th:utext="${user.roles}">ROLES</td>
 			<td th:utext="${user.active}">IS ACTIVE</td>
-			<td><a class="btn btn-info" th:href="@{/user/{id}(id = ${user.id})}" role="button">Edit</a></td>
+			<td><a class="btn btn-info" th:href="@{/users/{id}(id = ${user.id})}" role="button">Edit</a></td>
 		</tr>
 	</table>
 
