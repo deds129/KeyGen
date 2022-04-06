@@ -43,7 +43,7 @@
 					<h5 class="card-title">License Key Type</h5>
 					<label>Select list:
 						<select class="form-control" th:field="*{licenseType}">
-							<option th:each="type: ${licenseTypes}" th:text="${type.getTitle()}"
+							<option th:each="type: ${licenseTypes}" th:text="${type.getLicenseKeyName()}"
 									th:value="${type}"></option>
 						</select>
 					</label>

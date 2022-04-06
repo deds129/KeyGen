@@ -1,8 +1,7 @@
 package com.nchudinov.keygen.controller;
 
 import com.nchudinov.keygen.model.LicenseKey;
-import com.nchudinov.keygen.model.LicenseKeyTypes;
-import com.nchudinov.keygen.model.OperSystems;
+import com.nchudinov.keygen.model.LicenseType;
 import com.nchudinov.keygen.model.User;
 import com.nchudinov.keygen.service.LicenseKeyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class MainController {
@@ -36,13 +36,13 @@ public class MainController {
 	}
 	
 	@ModelAttribute("licenseTypes")
-	public LicenseKeyTypes[] getLicenseTypes(){
-		return LicenseKeyTypes.values();
+	public Set<LicenseType> getLicenseTypes(){
+		return ;
 	}
 
 	@ModelAttribute("operSystems")
-	public OperSystems[] getOperSystems(){
-		return OperSystems.values();
+	public OperSystemsTypes[] getOperSystems(){
+		return OperSystemsTypes.values();
 	}
 
 	@GetMapping("/addLicense")
