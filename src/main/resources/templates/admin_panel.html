@@ -44,12 +44,12 @@
 
 			<tr th:each="lecense, state : ${allLicenses}">
 				<td th:utext="${lecense.id}">ID</td>
-				<td th:utext="${lecense.getAuthorName()}">AUTHOR</td>
+				<td th:utext="${lecense.author}">AUTHOR</td>
 				<td th:utext="${lecense.customer}">CUSTOMER</td>
 				<td th:utext="${lecense.licenseType}">LICENSE TYPE</td>
 				<td th:utext="${lecense.host}">HOST</td>
 				<td th:utext="${lecense.port}">PORT</td>
-				<td th:utext="${lecense.operSystem}">OS</td>
+				<td th:utext="${lecense.os}">OS</td>
 				<td style="white-space:nowrap;
             			text-overflow:ellipsis;
             			overflow: hidden;

@@ -2,8 +2,13 @@ package com.nchudinov.keygen.controller;
 
 import com.nchudinov.keygen.model.LicenseKey;
 import com.nchudinov.keygen.model.LicenseType;
+import com.nchudinov.keygen.model.OsType;
 import com.nchudinov.keygen.model.User;
+import com.nchudinov.keygen.repository.LicenseKeyRepository;
+import com.nchudinov.keygen.repository.OsTypesRepository;
 import com.nchudinov.keygen.service.LicenseKeyService;
+import com.nchudinov.keygen.service.LicenseTypesService;
+import com.nchudinov.keygen.service.OsTypesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -19,6 +24,12 @@ public class MainController {
 	
 	@Autowired
 	private LicenseKeyService licenseKeyService;
+
+	@Autowired
+	private OsTypesService osTypesService;
+
+	@Autowired
+	private LicenseTypesService licenseTypesService;
 	
 	@GetMapping("/")
 	public String show(@RequestParam(required = false) String searchStr, Model model) {
@@ -36,13 +47,13 @@ public class MainController {
 	}
 	
 	@ModelAttribute("licenseTypes")
-	public Set<LicenseType> getLicenseTypes(){
-		return ;
+	public List<LicenseType> getLicenseTypes(){
+		return licenseTypesService.getAllLicenseTypes();
 	}
 
 	@ModelAttribute("operSystems")
-	public OperSystemsTypes[] getOperSystems(){
-		return OperSystemsTypes.values();
+	public List<OsType> getOsTypes(){
+		return osTypesService.getAllOsTypes();
 	}
 
 	@GetMapping("/addLicense")
@@ -54,7 +65,7 @@ public class MainController {
 	
 	@PostMapping("/saveLicense")
 	public String saveLicense(@AuthenticationPrincipal User user, @ModelAttribute("license") LicenseKey licenseKey) {
-		licenseKey.setUser(user);
+		licenseKey.setAuthor(user);
 		licenseKeyService.saveLicenseKey(licenseKey);
 		return "redirect:/";
 	}

@@ -17,7 +17,7 @@ public class LicenseKey {
 	
 	//customer one element;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_id")
+	@JoinColumn(name = "customer")
 	private Customer customer;
 	
 	@Column(name = "host")
@@ -46,35 +46,43 @@ public class LicenseKey {
 	@JoinColumn(name = "license_type")
 	private LicenseType licenseType;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer")
-	private Customer customer1;
+	public LicenseKey() {
+	}
 
-	@Column(name = "os")
-	private String os;
+	public LicenseKey(Integer id, Customer customer, String host, Integer port, String key, User author, String comment, Date startDate, Date endDate, LicenseType licenseType, Set<Feature> features, Set<DbType> dbTypes, Set<OsType> osTypes) {
+		this.id = id;
+		this.customer = customer;
+		this.host = host;
+		this.port = port;
+		this.key = key;
+		this.author = author;
+		this.comment = comment;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.licenseType = licenseType;
+		this.features = features;
+		this.dbTypes = dbTypes;
+		this.osTypes = osTypes;
+	}
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "feature_to_key",
 			joinColumns = @JoinColumn(name = "key_id"),
 			inverseJoinColumns = @JoinColumn(name = "feature_id"))
 	private Set<Feature> features = new LinkedHashSet<>();
-
-	@ManyToMany(mappedBy = "licenseKeys")
-	private Set<OsType> osTypes = new LinkedHashSet<>();
-
-	@ManyToMany
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "db_to_key",
 			joinColumns = @JoinColumn(name = "key_id"),
 			inverseJoinColumns = @JoinColumn(name = "db_type"))
 	private Set<DbType> dbTypes = new LinkedHashSet<>();
 
-	public Set<DbType> getDbTypes() {
-		return dbTypes;
-	}
-
-	public void setDbTypes(Set<DbType> dbTypes) {
-		this.dbTypes = dbTypes;
-	}
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "os_to_key",
+	joinColumns = @JoinColumn(name = "os_id"),
+	inverseJoinColumns =  @JoinColumn(name = "key_id"))
+	private Set<OsType> osTypes = new LinkedHashSet<>();
 
 	public Set<OsType> getOsTypes() {
 		return osTypes;
@@ -83,32 +91,21 @@ public class LicenseKey {
 	public void setOsTypes(Set<OsType> osTypes) {
 		this.osTypes = osTypes;
 	}
+	
+	public Set<DbType> getDbTypes() {
+		return dbTypes;
+	}
 
+	public void setDbTypes(Set<DbType> dbTypes) {
+		this.dbTypes = dbTypes;
+	}
+	
 	public Set<Feature> getFeatures() {
 		return features;
 	}
 
 	public void setFeatures(Set<Feature> features) {
 		this.features = features;
-	}
-
-	public String getOs() {
-		return os;
-	}
-
-	public void setOs(String os) {
-		this.os = os;
-	}
-
-	public Customer getCustomer1() {
-		return customer1;
-	}
-
-	public void setCustomer1(Customer customer1) {
-		this.customer1 = customer1;
-	}
-
-	public LicenseKey() {
 	}
 
 	public Customer getCustomer() {
@@ -118,11 +115,6 @@ public class LicenseKey {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
-	//os type (many elements)
-	
-	//features (many elements)
-	
 
 	public LicenseType getLicenseType() {
 		return licenseType;
