@@ -38,6 +38,6 @@ public class LicenseKeyServiceImpl implements LicenseKeyService {
 
 	@Override
 	public List<LicenseKey> getKeysByCustomer(String customerName) {
-		return licenseKeyRepository.findLicenseKeyByCustomer(customerName);
+		return licenseKeyRepository.findLicenseKeyByCustomerCustName(customerName);
 	}
 }

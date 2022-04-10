@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Entity
@@ -15,7 +16,6 @@ public class LicenseKey {
 	@Column(name = "id")
 	private Integer id;
 	
-	//customer one element;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "customer")
 	private Customer customer;
@@ -95,13 +95,26 @@ public class LicenseKey {
 	public Set<DbType> getDbTypes() {
 		return dbTypes;
 	}
-
+	
 	public void setDbTypes(Set<DbType> dbTypes) {
 		this.dbTypes = dbTypes;
 	}
 	
 	public Set<Feature> getFeatures() {
 		return features;
+	}
+	
+	//todo refactor
+	public Set<String> getFeaturesTitles(){
+		Set<String> featuresTitleSet = new LinkedHashSet<>();
+		featuresTitleSet = features.stream().map(Feature::getFeatureTitle).collect(Collectors.toSet());
+		return featuresTitleSet;
+	}
+
+	public Set<String> getOsTitles(){
+		Set<String> OsTitleSet = new LinkedHashSet<>();
+		OsTitleSet = osTypes.stream().map(OsType::getOsTitle).collect(Collectors.toSet());
+		return OsTitleSet;
 	}
 
 	public void setFeatures(Set<Feature> features) {

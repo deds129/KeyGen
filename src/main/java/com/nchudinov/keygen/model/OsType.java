@@ -1,5 +1,7 @@
 package com.nchudinov.keygen.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -15,6 +17,7 @@ public class OsType {
 	private Integer id;
 
 	@Lob
+	@Type(type = "org.hibernate.type.TextType")
 	@Column(name = "os_title", nullable = false)
 	private String osTitle;
 
