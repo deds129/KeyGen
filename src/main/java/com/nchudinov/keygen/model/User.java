@@ -1,11 +1,18 @@
 package com.nchudinov.keygen.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "usr")
 public class User implements UserDetails {
@@ -17,15 +24,15 @@ public class User implements UserDetails {
 	private String password;
 	private boolean active;
 	
+	private String email;
+	private String phoneNumber;
+	private String activationCode;
+	
 	@ElementCollection(targetClass =  Role.class, fetch = FetchType.EAGER)
 	@CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
 	@Enumerated(EnumType.STRING)
 	private Set<Role> roles;
-
-
-	public User() {
-	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -90,5 +97,29 @@ public class User implements UserDetails {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getActivationCode() {
+		return activationCode;
+	}
+
+	public void setActivationCode(String activationCode) {
+		this.activationCode = activationCode;
 	}
 }

@@ -10,7 +10,7 @@
 
 <div th:replace="_layout :: html_navbar"></div>
 
-<div>
+<div class="container mb-4">
 	<form th:action="@{/saveLicense}"
 		  th:object="${license}" method="POST">
 
@@ -19,34 +19,59 @@
 			<input type="hidden" th:field="*{id}"/>
 		</div>
 
-		<div class="card-columns">
+		<div class="card-columns" style="column-count: 4">
 			<div class="card">
 				<div class="card-body">
 					<!--div class="card-header bg-transparent border">Header</div -->
-					<h5 class="card-title">Customer</h5>
-					<div class="form-group form-row">
-						<label>
-							<input class="form-control" type="text" th:field="*{customer}" placeholder="Customer Name"
-								   required/>
-						</label>
-						<div class="valid-feedback">
-							Looks good!
-						</div>
-					</div>
+					<h5 class="card-title">Customer parameters</h5>
+					<label>Select customer:
+						<select class="form-control" th:field="*{customer.id}">
+							<option value=-1 disabled = "disabled" selected="selected">Select Customer</option>
+							<option th:each="customer: ${customers}" th:text="${customer.custName}"
+									th:value="${customer.id} "></option>
+						</select>
+					</label>
 				</div>
 			</div>
-
 
 			<div class="card">
 				<div class="card-body">
 					<!--div class="card-header bg-transparent border">Header</div -->
 					<h5 class="card-title">License Key Type</h5>
 					<label>Select list:
-						<select class="form-control" th:field="*{licenseType}">
-							<option th:each="type: ${licenseTypes}" th:text="${type.getLicenseKeyName()}"
-									th:value="${type}"></option>
+						<select class="form-control" th:field="*{licenseType.id}">
+							<option th:each="type: ${licenseTypes}" th:text="${type.typeTitle}"
+									th:value="${type.id}"></option>
 						</select>
 					</label>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Supporting OS</h5>
+					<th:block th:each="operSystem : ${operSystems}">
+						<div class="form-check">
+							<label class="form-check-label">
+								<input type="checkbox" th:value="${operSystem}"/>
+								<label th:text="${operSystem.osTitle}"></label>
+							</label>
+						</div>
+					</th:block>
+				</div>
+			</div>
+
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Supporting Features</h5>
+					<th:block th:each="feature : ${features}">
+						<div class="form-check">
+							<label class="form-check-label">
+								<input type="checkbox" th:value="${feature}"/>
+								<label th:text="${feature.featureTitle}"></label>
+							</label>
+						</div>
+					</th:block>
 				</div>
 			</div>
 
@@ -68,68 +93,18 @@
 
 			<div class="card">
 				<div class="card-body">
-					<h5 class="card-title">Supporting OS</h5>
-					<th:block th:each="operSystem : ${operSystems}">
-						<div class="form-check">
-							<label class="form-check-label">
-								<input type="checkbox" name="*{operSystem}" th:value="${operSystem}"/>
-								<label th:text="${operSystem}"></label>
-							</label>
-						</div>
-					</th:block>
-				</div>
-			</div>
-
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Supporting Features</h5>
-
-					<div class="form-check">
-						<label class="form-check-label" for="check1">
-							<input type="checkbox" class="form-check-input" id="check1" name="" value="">Audit
-						</label>
-					</div>
-
-					<div class="form-check">
-						<label class="form-check-label" for="check2">
-							<input type="checkbox" class="form-check-input" id="check2" name="" value="">Masking
-						</label>
-					</div>
-
-					<div class="form-check">
-						<label class="form-check-label" for="check3">
-							<input type="checkbox" class="form-check-input" id="check3" name="" value="">Data Discovery
-						</label>
-					</div>
-
-					<div class="form-check">
-						<label class="form-check-label" for="check4">
-							<input type="checkbox" class="form-check-input" id="check4" name="" value="">Security
-						</label>
-					</div>
-
-					<div class="form-check">
-						<label class="form-check-label" for="check5">
-							<input type="checkbox" class="form-check-input" id="check5" name="" value="">VA Scanner
-						</label>
-					</div>
-
-				</div>
-			</div>
-
-			<div class="card">
-				<div class="card-body">
 					<h5 class="card-title">Options</h5>
 
-					<div class="col-auto">
-						<label class="sr-only" for="inlineFormInput">Comment</label>
-						<input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Comment">
+					<div class="form-group form-row">
+						<label>
+							<input class="form-control" type="text" th:field="*{comment}" placeholder="Comment"/>
+						</label>
 					</div>
 
-					<div class="col-auto">
+					<div class="form-group form-row">
 						<div class="form-check mb-2">
-							<input class="form-check-input" type="checkbox" id="autoSizingCheck">
-							<label class="form-check-label" for="autoSizingCheck">
+							<input class="form-check-input" type="checkbox" id="containsJsonCheck">
+							<label class="form-check-label" for="containsJsonCheck">
 								Key Contains JSON
 							</label>
 						</div>
@@ -138,18 +113,35 @@
 				<!-- ---------------------------------------------------------------- -->
 			</div>
 
-			<div class="card text-center">
-				<blockquote class="blockquote mb-0">
-					<p>New CARD</p>
-					<footer class="blockquote-footer">
-						<small class="text-muted">
-							Someone famous in <cite title="Source Title">Source Title</cite>
-						</small>
-					</footer>
-				</blockquote>
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Enter License Period</h5>
+					<!--div>
+						<label for="datepicker">Enter start date for</label>
+						<input id="datepicker" width="276" type="date" th:field="*{startDate}"
+							   placeholder="01/01/2022"/>
+						<script>
+                            $('#datepicker').datepicker({
+                                uiLibrary: 'bootstrap4'
+                            });
+						</script>
+					</div-->
+
+					<div class="form-group form-row md-form">
+						<label class="sr-only" for="startDateInput">Start date</label>
+						<input class="form-control" id="startDateInput" type="date" th:field="*{startDate}"
+							   placeholder="Select date"/>
+					</div>
+					<div class="form-group form-row md-form">
+						<label class="sr-only" for="endDateInput">End date</label>
+						<input class="form-control" id="endDateInput" type="date" th:field="*{endDate}"
+							   placeholder="Select date"/>
+					</div>
+				</div>
 			</div>
-			
+
 		</div>
+
 
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>

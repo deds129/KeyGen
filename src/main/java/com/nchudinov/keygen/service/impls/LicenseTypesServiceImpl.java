@@ -1,8 +1,8 @@
-package com.nchudinov.keygen.service;
+package com.nchudinov.keygen.service.impls;
 
 import com.nchudinov.keygen.model.LicenseType;
-import com.nchudinov.keygen.repository.LicenseKeyRepository;
 import com.nchudinov.keygen.repository.LicenseTypesRepository;
+import com.nchudinov.keygen.service.LicenseTypesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public class LicenseTypesServiceImpl implements LicenseTypesService {
 
 	@Override
 	public LicenseType getLicenseTypeById(int id) {
-		return null;
+		return licenseTypesRepository.getById(id);
 	}
 
 	@Override

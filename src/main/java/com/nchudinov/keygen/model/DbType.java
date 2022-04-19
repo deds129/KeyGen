@@ -1,11 +1,19 @@
 package com.nchudinov.keygen.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "db_types", indexes = {
 		@Index(name = "db_types_db_title_uindex", columnList = "db_title", unique = true)
@@ -26,28 +34,4 @@ public class DbType {
 			joinColumns = @JoinColumn(name = "db_type"),
 			inverseJoinColumns = @JoinColumn(name = "key_id"))
 	private Set<LicenseKey> licenseKeys = new LinkedHashSet<>();
-
-	public Set<LicenseKey> getLicenseKeys() {
-		return licenseKeys;
-	}
-
-	public void setLicenseKeys(Set<LicenseKey> licenseKeys) {
-		this.licenseKeys = licenseKeys;
-	}
-
-	public String getDbTitle() {
-		return dbTitle;
-	}
-
-	public void setDbTitle(String dbTitle) {
-		this.dbTitle = dbTitle;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 }

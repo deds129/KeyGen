@@ -1,4 +1,4 @@
-package com.nchudinov.keygen.service;
+package com.nchudinov.keygen.service.impls;
 
 import com.nchudinov.keygen.model.User;
 import com.nchudinov.keygen.repository.UserRepository;

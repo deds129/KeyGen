@@ -1,9 +1,15 @@
 package com.nchudinov.keygen.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "customers")
 public class Customer {
@@ -22,56 +28,9 @@ public class Customer {
 	private String custPhone;
 	
 	@Column(name = "сust_website")
-	private String сustWebsite;
+	private String custWebsite;
 
 	@OneToMany(mappedBy = "customer")
 	private Set<LicenseKey> licenseKeys = new LinkedHashSet<>();
-
-	public Set<LicenseKey> getLicenseKeys() {
-		return licenseKeys;
-	}
-
-	public void setLicenseKeys(Set<LicenseKey> licenseKeys) {
-		this.licenseKeys = licenseKeys;
-	}
-
-	public String getСustWebsite() {
-		return сustWebsite;
-	}
-
-	public void setСustWebsite(String сustWebsite) {
-		this.сustWebsite = сustWebsite;
-	}
-
-	public String getCustPhone() {
-		return custPhone;
-	}
-
-	public void setCustPhone(String custPhone) {
-		this.custPhone = custPhone;
-	}
-
-	public String getCustEmail() {
-		return custEmail;
-	}
-
-	public void setCustEmail(String custEmail) {
-		this.custEmail = custEmail;
-	}
-
-	public String getCustName() {
-		return custName;
-	}
-
-	public void setCustName(String custName) {
-		this.custName = custName;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	
 }

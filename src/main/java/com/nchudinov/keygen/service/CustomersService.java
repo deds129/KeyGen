@@ -1,0 +1,16 @@
+package com.nchudinov.keygen.service;
+
+import com.nchudinov.keygen.model.Customer;
+
+import java.util.List;
+
+public interface CustomersService {
+	
+	List<Customer> getAllCustomers();
+
+	void saveNewCustomer(Customer customer);
+
+	Customer getCustomerById(int id);
+
+	void deleteCustomerId(int id);
+}

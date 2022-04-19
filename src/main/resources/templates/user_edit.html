@@ -12,7 +12,7 @@
 
 <div class="container mb-4">
 	<h3>User Edit</h3>
-	
+
 	<form action="#"
 		  th:action="@{{usrId}(usrId=${user.id})}"
 		  th:object="${user}"
@@ -20,14 +20,33 @@
 		<div>
 			<input type="hidden" th:field="${user.id}"/>
 		</div>
-		<div><label>New username : <input class="form-control" type="text" th:field="${user.username}" placeholder="New username"/></label></div>
-		
-		<div class="input-group">
-			<input type="password" class="form-control" id="pwdInput" placeholder="New password" th:field="${user.password}" aria-label="New password" aria-describedby="basic-addon2">
-			<!-- todo fix button -->
-			<div class="input-group-append">
-				<button class="btn btn-outline-secondary" onclick="myFunction()" type="button">Show Password</button>
-			</div>
+
+		<div class="form-group">
+			<label for="loginInput">Login</label>
+			<input type="text" class="form-control" id="loginInput" th:field="${user.username}" aria-describedby="loginHelp" placeholder="Enter login">
+			<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
+		</div>
+
+		<div class="form-group">
+			<label for="passwordInput">Password</label>
+			<input type="password" class="form-control" id="passwordInput" th:field="${user.password}" aria-describedby="loginHelp" placeholder="Enter login">
+			<small id="passwordHelp" class="form-text text-muted">
+				Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="emailInput">Password</label>
+			<input type="password" class="form-control" id="emailInput" th:field="${user.email}" aria-describedby="loginHelp" placeholder="Enter login">
+			<small id="emailHelp" class="form-text text-muted">
+				We'll never share your email with anyone else
+			</small>
+		</div>
+
+		<div class="form-group">
+			<label for="phoneInput">Phone</label>
+			<input type="text" class="form-control" id="phoneInput" th:field="${user.phoneNumber}" aria-describedby="loginHelp" placeholder="Enter login">
+			<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
 		</div>
 		
 		<div class="form-check">
@@ -36,7 +55,7 @@
 				User is active
 			</label>
 		</div>
-		
+
 		<br>
 		<div><input type="submit" value="Save User"/></div>
 		<input type="hidden" name="user"

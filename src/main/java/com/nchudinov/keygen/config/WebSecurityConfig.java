@@ -1,6 +1,6 @@
 package com.nchudinov.keygen.config;
 
-import com.nchudinov.keygen.service.UserServiceImpl;
+import com.nchudinov.keygen.service.impls.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

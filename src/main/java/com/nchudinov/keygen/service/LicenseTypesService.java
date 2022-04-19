@@ -1,7 +1,6 @@
 package com.nchudinov.keygen.service;
 
 import com.nchudinov.keygen.model.LicenseType;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

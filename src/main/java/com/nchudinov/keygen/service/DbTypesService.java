@@ -7,7 +7,7 @@ import java.util.List;
 public interface DbTypesService {
 	List<DbType> getAllDbTypes();
 
-	public void saveNewDbType(DbType dbType);
+	void saveNewDbType(DbType dbType);
 
 	DbType getDbTypeById(int id);
 

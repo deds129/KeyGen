@@ -49,8 +49,8 @@
 				<td th:utext="${license.id}">ID</td>
 				<!--one to many -->
 				<!--todo add links to user/author pages -->
-				<td th:utext="${license.author.username}">AUTHOR</td>
-				<td th:utext="${license.customer.custName}">CUSTOMER</td>
+				<td> <a href="#link" th:utext="${license.author.username}"></a></td>
+				<td> <a href="#link" th:utext="${license.customer.custName}"></a></td>
 				<td th:utext="${license.licenseType.typeTitle}">LICENSE TYPE</td>
 				<!--simple fields -->
 				<td th:utext="${license.host}">HOST</td>

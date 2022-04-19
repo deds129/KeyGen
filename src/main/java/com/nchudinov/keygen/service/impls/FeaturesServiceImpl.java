@@ -1,7 +1,8 @@
-package com.nchudinov.keygen.service;
+package com.nchudinov.keygen.service.impls;
 
 import com.nchudinov.keygen.model.Feature;
 import com.nchudinov.keygen.repository.FeaturesRepository;
+import com.nchudinov.keygen.service.FeaturesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
