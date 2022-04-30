@@ -86,6 +86,7 @@ public class MainController {
 		Customer customer = licenseKey.getCustomer();
 		LicenseType licenseType = licenseKey.getLicenseType();
 		
+		//todo reformat
 		Customer custFromDb = customersService.getCustomerById(customer.getId());
 		LicenseType licenseTypeFromDb = licenseTypesService.getLicenseTypeById(licenseType.getId());
 		licenseKey.setCustomer(custFromDb);

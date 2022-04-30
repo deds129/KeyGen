@@ -1,9 +1,7 @@
 package com.nchudinov.keygen.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -23,6 +21,8 @@ public class User implements UserDetails {
 	private String username;
 	private String password;
 	private boolean active;
+	
+	private String fileName;
 	
 	private String email;
 	private String phoneNumber;
@@ -121,5 +121,13 @@ public class User implements UserDetails {
 
 	public void setActivationCode(String activationCode) {
 		this.activationCode = activationCode;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String avatar) {
+		this.fileName = avatar;
 	}
 }
