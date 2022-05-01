@@ -29,6 +29,14 @@ public class UserController {
 		model.addAttribute("users", userService.findAll());
 		return "user_list";
 	}
+
+	@GetMapping("/registration")
+	public String registerNewUser(Model model) {
+		User user = new User();
+		model.addAttribute("user", user);
+		model.addAttribute("roles", Role.values());
+		return "user_edit";
+	}
 	
 	@GetMapping("{usrId}")
 	private String editUser(@PathVariable("usrId") long id, Model model ){
@@ -41,7 +49,7 @@ public class UserController {
 	}
 
 	@PostMapping("{user}")
-	private String updateUser(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file) throws IOException {
+	private String addOrUpdateUser(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file) throws IOException {
 		
 		if (file != null && !file.getOriginalFilename().isEmpty()) {
 			File uploadDir = new File(uploadPath);
@@ -51,7 +59,7 @@ public class UserController {
 			}
 
 			String fileNameUUID = UUID.randomUUID().toString();
-			String resultFilename = fileNameUUID + "." + file.getOriginalFilename();
+			String resultFilename = fileNameUUID + file.getOriginalFilename();
 			file.transferTo(new File(uploadPath + "/" + resultFilename));
 			user.setFileName(resultFilename);
 		}

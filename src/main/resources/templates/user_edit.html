@@ -60,7 +60,7 @@
 							<div class="mb-3">
 								<label for="loginInput">Login</label>
 								<input type="text" class="form-control" id="loginInput" th:field="${user.username}"
-									   aria-describedby="loginHelp" placeholder="Enter login">
+									   aria-describedby="loginHelp" placeholder="Enter user login">
 								<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
 							</div>
 
@@ -72,8 +72,8 @@
 								<div class="col-md-6">
 									<label for="passwordInput">Password</label>
 									<input type="password" class="form-control" id="passwordInput"
-										   th:field="${user.password}" aria-describedby="loginHelp"
-										   placeholder="Enter login">
+										   th:field="${user.password}" aria-describedby="passwordHelp"
+										   placeholder="Enter user password">
 									<small id="passwordHelp" class="form-text text-muted">
 										Your password must be 8-20 characters long, contain letters and numbers, and
 										must not contain spaces, special characters, or emoji.
@@ -82,9 +82,10 @@
 
 								<div class="col-md-6">
 									<label for="confirmPasswordInput">Confirm new Password Password</label>
+									<!--mock data -->
 									<input type="password" class="form-control" id="confirmPasswordInput"
-										   th:field="${user.password}" aria-describedby="loginHelp"
-										   placeholder="Enter login">
+										   value="" aria-describedby="confirmHelp"
+										   placeholder="Confirm password">
 									<small id="confirmHelp" class="form-text text-muted">
 										Your password must be 8-20 characters long, contain letters and numbers, and
 										must not contain spaces, special characters, or emoji.
@@ -98,8 +99,8 @@
 
 								<div class="col-md-6">
 									<label for="emailInput">Email</label>
-									<input type="password" class="form-control" id="emailInput" th:field="${user.email}"
-										   aria-describedby="loginHelp" placeholder="Enter login">
+									<input type="text" class="form-control" id="emailInput" th:field="${user.email}"
+										   aria-describedby="emailHelp" placeholder="Enter user login">
 									<small id="emailHelp" class="form-text text-muted">
 										We'll never share your email with anyone else
 									</small>
@@ -110,7 +111,7 @@
 									<label for="phoneInput">Phone</label>
 									<input type="text" class="form-control" id="phoneInput"
 										   th:field="${user.phoneNumber}" aria-describedby="loginHelp"
-										   placeholder="Enter login">
+										   placeholder="Enter user phone number">
 									<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
 								</div>
 
@@ -131,9 +132,12 @@
 
 							<!-- Save changes button-->
 							<br>
-							<div><input type="submit" value="Save User"/></div>
-							<input type="hidden" name="user"
-								   th:value="${user}" value="Update"/>
+							
+							<div>
+								<input type="hidden" name="user" th:value="${user}"/>
+								<input type="submit" value="Save User"/>
+							</div>
+							
 						</form>
 					</div>
 				</div>

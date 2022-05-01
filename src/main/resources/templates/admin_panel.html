@@ -11,19 +11,23 @@
 <div th:insert="_layout :: html_navbar"></div>
 
 <div class="container mb-4">
-
-
+	
 	<div>
 		<h3>Licenses</h3>
 	</div>
+	
 	<br>
+	<!-- Search Field -->
 	<div>
 		<form class="form-inline" method="get">
-			<input class="form-control mr-sm-2" type="search" name="searchStr" placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Customer</button>
+			<input class="form-control mr-sm-2" type="search" name="searchStr" placeholder="Search" aria-label="Customer">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
 	</div>
+	
 	<br>
+	
+	<!-- Licenses table -->
 	<div>
 		<table class="table table-striped container-fluid">
 			<thead class="thead-light">
@@ -40,7 +44,7 @@
 				<!--th scope="col">DB TYPES</th-->
 				<th scope="col">OS</th>
 				<!--todo reformat -->
-				<th scope="col" style="text-align: center">OPTIONS</th>
+				<th scope="col">OPTIONS</th>
 			</tr>
 			</thead>
 
@@ -65,11 +69,11 @@
 				<!-- buttons block -->
 
 				<td>
-					<div class="btn-toolbar" role="group" aria-label="Basic example">
+					<div class="btn-toolbar" role="group" aria-label="Options group">
 						<!-- Button trigger modal -->
-						<button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+						<button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal"
 								th:data-target="'#modalButton' + ${license.id}">
-							Show License
+							<img src="/static/bootstrap-icons-1.8.1/eye-fill.svg" alt="Bootstrap" width="20" height="16">
 						</button>
 
 						<!-- Modal -->
@@ -94,21 +98,21 @@
 								</div>
 							</div>
 						</div>
-
-						<div>
-							<form name="license" th:action="@{/deleteLicense}" method="post">
-								<input class="btn btn-danger btn-sm" type="submit" value="Delete"/>
-								<input type="hidden" name="licId"
-									   th:value="${license.id}"/>
-							</form>
-						</div>
 						
-						<div>
-							<form name="license" th:action="@{/updateLicense}" method="post">
-								<input class="btn btn-primary btn-sm" type="submit" value="Update"/>
+							<form name="license" th:action="@{/deleteLicense}" method="post">
 								<input type="hidden" name="licId" th:value="${license.id}"/>
+								<button type="submit" class="btn btn-outline-danger">
+									<img src="/static/bootstrap-icons-1.8.1/x-circle-fill.svg" alt="Bootstrap" width="16" height="16">
+								</button>
 							</form>
-						</div>
+						
+						
+							<form name="license" th:action="@{/updateLicense}" method="post">
+								<input type="hidden" name="licId" th:value="${license.id}"/>
+								<button type="submit" class="btn btn-outline-info">
+									<img src="/static/bootstrap-icons-1.8.1/vector-pen.svg" alt="Bootstrap" width="16" height="16">
+								</button>
+							</form>
 					</div>
 				</td>
 			</tr>

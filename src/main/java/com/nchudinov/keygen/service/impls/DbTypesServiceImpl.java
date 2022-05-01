@@ -13,14 +13,12 @@ public class DbTypesServiceImpl implements DbTypesService {
 	
 	@Autowired
 	private DbTypesRepository dbTypesRepository;
-
-
+	
 	@Override
 	public List<DbType> getAllDbTypes() {
 		return dbTypesRepository.findAll();
 	}
 	
-
 	@Override
 	public void saveNewDbType(DbType dbType) {
 		dbTypesRepository.save(dbType);
