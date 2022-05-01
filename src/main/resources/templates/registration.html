@@ -1,19 +1,148 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head th:replace="_layout :: html_head">
-	<title>Registration Page</title>
-</head>
-<body>
-<div>Add new user</div>
+<!DOCTYPE HTML>
+<html lang="java" xmlns:th="http://www.thymeleaf.org">
 
-<div>
-    <form th:action="@{/registration}" method="post">
-        <div><label> User Name : <input type="text" name="username"/> </label></div>
-        <div><label> Password: <input type="password" name="password"/> </label></div>
-        <div><input type="submit" value="Save User"/></div>
-    </form>
-</div>
+<head th:replace="_layout :: html_head">
+	<title>User Edit</title>
+</head>
+
+<body>
+
+
+<div th:replace="_layout :: html_navbar"></div>
+
+<form th:action="@{/registration}"
+	  th:object="${newUser}"
+	  enctype="multipart/form-data"
+	  method="post">
+	<div class="container-xl px-4 mt-4">
+		<hr class="mt-0 mb-4">
+		<div class="row">
+			<div class="col-xl-2">
+				<!-- Profile picture card-->
+				<div class="card mb-4 mb-xl-0">
+					<div class="card-header">Profile Picture</div>
+					<div class="card-body text-center">
+						<!-- profile image-->
+						<div class="user_avatar align-center" th:if="${newUser.fileName}">
+							<img class="avatar img-circle img-thumbnail"
+								 th:src="@{'/static/img/' + ${newUser.fileName}}" alt="avatar">
+						</div>
+
+						<!-- default user profile image -->
+						<div class="user_avatar align-center" th:unless="${newUser.fileName}">
+							<img class="avatar img-circle img-thumbnail"
+								 src="../static/img/default_avatar.png" alt="avatar">
+						</div>
+						<!-- Profile picture help block-->
+						<div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+						<!-- Profile picture upload button-->
+						<div class="mb-3">
+							<input class="form-control" type="file" name="file">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Account details card-->
+			<div class="col-xl-8">
+				<div class="card mb-4">
+					<div class="card-header">Account Details</div>
+					<div class="card-body">
+						<form>
+							<!-- hidden user id -->
+							<div>
+								<input type="hidden" th:field="${newUser.id}"/>
+							</div>
+
+
+							<!-- Form Group (username)-->
+							<div class="mb-3">
+								<label for="loginInput">Login</label>
+								<input type="text" class="form-control" id="loginInput" th:field="${newUser.username}"
+									   aria-describedby="loginHelp" placeholder="Enter user login">
+								<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
+							</div>
+
+
+							<!-- Form Row-->
+							<!-- Form Group password & password confirmation-->
+							<div class="row gx-3 mb-3">
+
+								<div class="col-md-6">
+									<label for="passwordInput">Password</label>
+									<input type="password" class="form-control" id="passwordInput"
+										   th:field="${newUser.password}" aria-describedby="passwordHelp"
+										   placeholder="Enter user password">
+									<small id="passwordHelp" class="form-text text-muted">
+										Your password must be 8-20 characters long, contain letters and numbers, and
+										must not contain spaces, special characters, or emoji.
+									</small>
+								</div>
+
+								<div class="col-md-6">
+									<label for="confirmPasswordInput">Confirm new Password Password</label>
+									<!--mock data -->
+									<input type="password" class="form-control" id="confirmPasswordInput"
+										   value="" aria-describedby="confirmHelp"
+										   placeholder="Confirm password">
+									<small id="confirmHelp" class="form-text text-muted">
+										Your password must be 8-20 characters long, contain letters and numbers, and
+										must not contain spaces, special characters, or emoji.
+									</small>
+								</div>
+
+							</div>
+
+							<!-- Form Row User contacts: phone number + email -->
+							<div class="row gx-3 mb-3">
+
+								<div class="col-md-6">
+									<label for="emailInput">Email</label>
+									<input type="text" class="form-control" id="emailInput" th:field="${newUser.email}"
+										   aria-describedby="emailHelp" placeholder="Enter user login">
+									<small id="emailHelp" class="form-text text-muted">
+										We'll never share your email with anyone else
+									</small>
+								</div>
+
+								<div class="col-md-6">
+									<!-- Form phone-->
+									<label for="phoneInput">Phone</label>
+									<input type="text" class="form-control" id="phoneInput"
+										   th:field="${newUser.phoneNumber}" aria-describedby="loginHelp"
+										   placeholder="Enter user phone number">
+									<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
+								</div>
+
+							</div>
+							<!-- Form Group user enabled in system-->
+							<div class="mb-3">
+								<div class="col-md-6">
+									<input class="form-check-input" type="checkbox" th:field="${newUser.active}"
+										   id="isActiveCheckBox">
+									<label class="form-check-label" for="isActiveCheckBox">
+										User is active
+									</label>
+								</div>
+							</div>
+
+							<!--todo place to user roles -->
+							<!--todo place to user firstname + secondname -->
+
+							<!-- Save changes button-->
+							<br>
+
+							<div>
+								<input type="submit" value="Save User"/>
+							</div>
+
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
 
 </body>
 </html>
