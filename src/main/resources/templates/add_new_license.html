@@ -53,13 +53,16 @@
 					<th:block th:each="operSystem : ${operSystems}">
 						<div class="form-check">
 							<label class="form-check-label">
-								<input type="checkbox" th:value="${operSystem}"/>
+								<input type="checkbox" th:value="${operSystem.id}" th:field="${license.osTypes}"/>
 								<label th:text="${operSystem.osTitle}"></label>
 							</label>
 						</div>
 					</th:block>
 				</div>
 			</div>
+			
+			<!--todo add add dbTypes -->
+			
 
 			<div class="card">
 				<div class="card-body">
@@ -67,7 +70,7 @@
 					<th:block th:each="feature : ${features}">
 						<div class="form-check">
 							<label class="form-check-label">
-								<input type="checkbox" th:value="${feature}"/>
+								<input type="checkbox" th:value="${feature.id}" th:field="${license.features}"/>
 								<label th:text="${feature.featureTitle}"></label>
 							</label>
 						</div>

@@ -73,8 +73,8 @@ public class LicenseKey {
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "os_to_key",
-	joinColumns = @JoinColumn(name = "os_id"),
-	inverseJoinColumns =  @JoinColumn(name = "key_id"))
+	joinColumns = @JoinColumn(name = "key_id"),
+	inverseJoinColumns =  @JoinColumn(name = "os_id"))
 	private Set<OsType> osTypes = new LinkedHashSet<>();
 	
 	//todo refactor
