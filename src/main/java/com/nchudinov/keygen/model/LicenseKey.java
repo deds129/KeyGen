@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -77,14 +79,30 @@ public class LicenseKey {
 	
 	//todo refactor
 	public Set<String> getFeaturesTitles(){
-		Set<String> featuresTitleSet = new LinkedHashSet<>();
+		Set<String> featuresTitleSet;
 		featuresTitleSet = features.stream().map(Feature::getFeatureTitle).collect(Collectors.toSet());
 		return featuresTitleSet;
 	}
 
 	public Set<String> getOsTitles(){
-		Set<String> OsTitleSet = new LinkedHashSet<>();
+		Set<String> OsTitleSet;
 		OsTitleSet = osTypes.stream().map(OsType::getOsTitle).collect(Collectors.toSet());
 		return OsTitleSet;
+	}
+
+	@Override
+	public String toString() {
+		return "LicenseKey{" +
+				"customer=" + customer.getCustName() +
+				", licenseType=" + licenseType.getTypeTitle() +
+				", host='" + host + '\'' +
+				", port=" + port +
+				", comment='" + comment + '\'' +
+				", startDate='" + new SimpleDateFormat("yyyy-mm-dd").format(startDate) + '\'' +
+				", endDate='" +  new SimpleDateFormat("yyyy-mm-dd").format(endDate) + '\'' +
+				", features=" + Arrays.toString(features.stream().map(Feature::getFeatureTitle).toArray()) +
+				", dbTypes=" + Arrays.toString(dbTypes.stream().map(DbType::getDbTitle).toArray()) +
+				", osTypes=" + Arrays.toString(osTypes.stream().map(OsType::getOsTitle).toArray()) +
+				'}';
 	}
 }
