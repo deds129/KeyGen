@@ -26,6 +26,9 @@ public class MainController {
 
 	@Autowired
 	private FeaturesService featuresService;
+	
+	@Autowired
+	private DbTypesService dbTypesService;
 
 	@Autowired
 	private CustomersServiceImpl customersService;
@@ -63,6 +66,11 @@ public class MainController {
 	@ModelAttribute("features")
 	public List<Feature> getFeatures(){
 		return featuresService.getAllFeatures();
+	}
+
+	@ModelAttribute("dbTypes")
+	public List<DbType> getDbTypes(){
+		return dbTypesService.getAllDbTypes();
 	}
 
 	@GetMapping("/addLicense")
