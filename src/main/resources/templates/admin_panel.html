@@ -35,7 +35,7 @@
 				<th scope="col">ID</th>
 				<th scope="col">AUTHOR</th>
 				<th scope="col">CUSTOMER</th>
-				<th scope="col">LICENSE TYPE</th>
+				<th scope="col">TYPE</th>
 				<th scope="col">HOST</th>
 				<th scope="col">PORT</th>
 				<!--th scope="col">START DATE</th-->
@@ -43,6 +43,7 @@
 				<th scope="col">FEATURES</th>
 				<!--th scope="col">DB TYPES</th-->
 				<th scope="col">OS</th>
+				<th scope="col">DB TYPE</th>
 				<!--todo reformat -->
 				<th scope="col">OPTIONS</th>
 			</tr>
@@ -65,6 +66,7 @@
 				<td th:utext="${license.getFeaturesTitles()}">Features</td>
 				<!--td th:utext="${license.dbTypes}">Db types</td-->
 				<td th:utext="${license.getOsTitles()}">OS</td>
+				<td th:utext="${license.getDbTypeTitles()}">DB TYPE</td>
 
 				<!-- buttons block -->
 

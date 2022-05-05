@@ -79,15 +79,15 @@ public class LicenseKey {
 	
 	//todo refactor
 	public Set<String> getFeaturesTitles(){
-		Set<String> featuresTitleSet;
-		featuresTitleSet = features.stream().map(Feature::getFeatureTitle).collect(Collectors.toSet());
-		return featuresTitleSet;
+		return features.stream().map(Feature::getFeatureTitle).collect(Collectors.toSet());
 	}
 
 	public Set<String> getOsTitles(){
-		Set<String> OsTitleSet;
-		OsTitleSet = osTypes.stream().map(OsType::getOsTitle).collect(Collectors.toSet());
-		return OsTitleSet;
+		return osTypes.stream().map(OsType::getOsTitle).collect(Collectors.toSet());
+	}
+
+	public Set<String> getDbTypeTitles(){
+		return dbTypes.stream().map(DbType::getDbTitle).collect(Collectors.toSet());
 	}
 
 	@Override
@@ -98,8 +98,8 @@ public class LicenseKey {
 				", host='" + host + '\'' +
 				", port=" + port +
 				", comment='" + comment + '\'' +
-				", startDate='" + new SimpleDateFormat("yyyy-mm-dd").format(startDate) + '\'' +
-				", endDate='" +  new SimpleDateFormat("yyyy-mm-dd").format(endDate) + '\'' +
+				", startDate='" + new SimpleDateFormat("yyyy-MM-dd").format(startDate) + '\'' +
+				", endDate='" +  new SimpleDateFormat("yyyy-MM-dd").format(endDate) + '\'' +
 				", features=" + Arrays.toString(features.stream().map(Feature::getFeatureTitle).toArray()) +
 				", dbTypes=" + Arrays.toString(dbTypes.stream().map(DbType::getDbTitle).toArray()) +
 				", osTypes=" + Arrays.toString(osTypes.stream().map(OsType::getOsTitle).toArray()) +
