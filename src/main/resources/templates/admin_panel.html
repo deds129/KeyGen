@@ -77,7 +77,7 @@
 								th:data-target="'#modalButton' + ${license.id}">
 							<img src="/static/bootstrap-icons-1.8.1/eye-fill.svg" alt="Bootstrap" width="20" height="16">
 						</button>
-
+						
 						<!-- Modal -->
 						<div class="modal fade" th:id="'modalButton' + ${license.id}" tabindex="-1" role="dialog"
 							 aria-hidden="true">
@@ -90,12 +90,13 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<p style="word-break: break-all" th:utext="${license.key}">Key</p>
+										<p th:id="licKey + ${license.id}" style="word-break: break-all" th:utext="${license.key}">Key</p>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-										</button>
-										<button type="button" class="btn btn-primary">Copy to clipboard</button>
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										<!-- add js script for key copy: dynamic thymeleaf parameter problem now its empty-->
+										<button onclick=copyToClipboard1() type="button" class="btn btn-primary">Copy to clipboard</button>
+										
 									</div>
 								</div>
 							</div>

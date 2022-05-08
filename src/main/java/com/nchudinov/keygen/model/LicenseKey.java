@@ -59,19 +59,19 @@ public class LicenseKey {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "feature_to_key",
 			joinColumns = @JoinColumn(name = "key_id"),
 			inverseJoinColumns = @JoinColumn(name = "feature_id"))
 	private Set<Feature> features = new LinkedHashSet<>();
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "db_to_key",
 			joinColumns = @JoinColumn(name = "key_id"),
 			inverseJoinColumns = @JoinColumn(name = "db_type"))
 	private Set<DbType> dbTypes = new LinkedHashSet<>();
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "os_to_key",
 	joinColumns = @JoinColumn(name = "key_id"),
 	inverseJoinColumns =  @JoinColumn(name = "os_id"))
