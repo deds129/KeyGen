@@ -105,9 +105,9 @@ public class MainController {
 		licenseKeyService.saveLicenseKey(licenseKey);
 		return "redirect:/";
 	}
-
+	
 	@PostMapping("/deleteLicense")
-	public String  deleteLicense(@RequestParam("licId") int id, Model model) {
+	public String deleteLicense(@RequestParam("licId") int id, Model model) {
 		licenseKeyService.deleteLicenseById(id);
 		return "redirect:/";
 	}

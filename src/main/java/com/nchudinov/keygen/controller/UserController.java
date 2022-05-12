@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/users")
+
 public class UserController {
 	
 	@Value("${upload.path}")
@@ -24,21 +24,13 @@ public class UserController {
 	@Autowired
 	private UserServiceImpl userService;
 	
-	@GetMapping
+	@GetMapping("/users")
 	private String userList(Model model){
 		model.addAttribute("users", userService.findAll());
 		return "users_list";
 	}
-
-	@GetMapping("/registration")
-	public String registerNewUser(Model model) {
-		User user = new User();
-		model.addAttribute("user", user);
-		model.addAttribute("roles", Role.values());
-		return "user_edit";
-	}
 	
-	@GetMapping("{usrId}")
+	@GetMapping("/users/{usrId}")
 	private String editUser(@PathVariable("usrId") long id, Model model ){
 		User user = userService.loadUserById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
@@ -48,8 +40,16 @@ public class UserController {
 		return "user_edit";
 	}
 
-	@PostMapping("{user}")
-	private String addOrUpdateUser(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file) throws IOException {
+	@GetMapping("/users/registration")
+	public String registerNewUser(Model model) {
+		User user = new User();
+		model.addAttribute("user", user);
+		model.addAttribute("roles", Role.values());
+		return "user_edit";
+	}
+
+	@PostMapping("/saveUser")
+	private String saveUpdatedUser(User user, @RequestParam("file") MultipartFile file) throws IOException {
 		
 		if (file != null && !file.getOriginalFilename().isEmpty()) {
 			File uploadDir = new File(uploadPath);

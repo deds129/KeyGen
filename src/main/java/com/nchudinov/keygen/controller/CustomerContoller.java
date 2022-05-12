@@ -44,7 +44,7 @@ public class CustomerContoller {
 		return "redirect:/customers";
 	}
 
-	//todo delete user mapping??
+	//delete customer using GET request
 	@GetMapping("customers/deleteCustomer/{custId}")
 	public String  deleteCustomer(@PathVariable("custId") int id, Model model ) {
 		customersService.deleteCustomerId(id);

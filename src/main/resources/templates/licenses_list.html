@@ -107,7 +107,8 @@
 								</div>
 							</div>
 						</div>
-
+						
+						<!-- can be replaced by GET requests -->
 						<form name="license" th:action="@{/deleteLicense}" method="post">
 							<input type="hidden" name="licId" th:value="${license.id}"/>
 							<button type="submit" class="btn btn-outline-danger">

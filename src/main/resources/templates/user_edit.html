@@ -10,7 +10,7 @@
 <div th:replace="_layout :: html_navbar"></div>
 
 <form action="#"
-	  th:action="@{{usrId}(usrId=${user.id})}"
+	  th:action="@{/saveUser}"
 	  th:object="${user}"
 	  enctype="multipart/form-data"
 	  method="post">
@@ -45,7 +45,7 @@
 
 			<!-- Account details card-->
 			<div class="col-xl-8">
-					<div class="card mb-4">
+				<div class="card mb-4">
 					<div class="card-header">Account Details</div>
 					<div class="card-body">
 						<form>
@@ -133,10 +133,10 @@
 
 								<div class="col-md-6">
 									<label class="form-check-label" for="selectRole">Select customer:</label>
-										<select id="selectRole" class="form-control" th:field="${user.roles}">
-											<option th:each="role: ${roles}" th:text="${role.name()}"
-													th:value="${role}"></option>
-										</select>
+									<select id="selectRole" class="form-control" th:field="${user.roles}">
+										<option th:each="role: ${roles}" th:text="${role.name()}"
+												th:value="${role}"></option>
+									</select>
 								</div>
 
 								<div class="col-md-6">
@@ -146,14 +146,13 @@
 										User is active
 									</label>
 								</div>
-								
+
 							</div>
-							
+
 							<!-- Save changes button-->
 							<br>
 
 							<div>
-								<input type="hidden" name="user" th:value="${user}"/>
 								<input class="btn btn-primary" type="submit" value="Save User"/>
 							</div>
 

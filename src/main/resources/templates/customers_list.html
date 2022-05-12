@@ -11,7 +11,7 @@
 	<h3>List of Customers</h3>
 	<table class="table table-striped container-fluid">
 		<thead class="thead-light">
-		
+
 		<tr>
 			<th scope="col">ID</th>
 			<th scope="col">NAME</th>
@@ -23,7 +23,7 @@
 			<!--th scope="col">KEYS</th-->
 		</tr>
 		</thead>
-		
+
 		<tr th:each="customer, state : ${customers}">
 			<td th:utext="${customer.id}">ID</td>
 			<td th:utext="${customer.custName}">NAME</td>
@@ -34,27 +34,16 @@
 			<td>
 				<a class="btn btn-info" th:href="@{/customers/{id}(id = ${customer.id})}" role="button">Edit</a>
 				<!-- user deleting supported by post request -->
-				
-				<a class="btn btn-danger" th:href="@{/customers/deleteCustomer/{id}(id = ${customer.id})}" role="button">Delete</a>
+
+				<a class="btn btn-danger" th:href="@{/customers/deleteCustomer/{id}(id = ${customer.id})}"
+				   role="button">Delete</a>
 			</td>
 		</tr>
-		
+
 	</table>
 	<!--todo: button or input -->
 	<a class="btn btn-primary" th:href="@{/customers/addCustomer/}" role="button">Add new Customer</a>
 </div>
-
-
-
-<!--form name="license" th:action="@{/updateLicense}" method="post">
-	<input type="hidden" name="licId" th:value="${license.id}"/>
-	<button type="submit" class="btn btn-outline-info">
-		<img src="/static/bootstrap-icons-1.8.1/vector-pen.svg" alt="Bootstrap" width="16"
-			 height="16">
-	</button>
-</form-->
-
-
 </body>
 </html>
 
