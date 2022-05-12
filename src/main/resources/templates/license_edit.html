@@ -16,7 +16,7 @@
 
 		<!-- --------------------------------------------------------------------------------------- -->
 		<div>
-			<input type="hidden" th:field="*{id}"/>
+			<input type="hidden" th:field="${license.id}"/>
 		</div>
 
 		<div class="card-columns" style="column-count: 4">
@@ -38,7 +38,7 @@
 				<div class="card-body">
 					<!--div class="card-header bg-transparent border">Header</div -->
 					<h5 class="card-title">License Key Type</h5>
-					<label>Select list:
+					<label>Select customer:
 						<select class="form-control" th:field="*{licenseType.id}">
 							<option th:each="type: ${licenseTypes}" th:text="${type.typeTitle}"
 									th:value="${type.id}"></option>

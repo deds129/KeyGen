@@ -30,6 +30,9 @@ public class Customer {
 	@Column(name = "сust_website")
 	private String custWebsite;
 
+	@Column(name = "company_name")
+	private String custCompName;
+
 	@OneToMany(mappedBy = "customer")
 	private Set<LicenseKey> licenseKeys = new LinkedHashSet<>();
 	

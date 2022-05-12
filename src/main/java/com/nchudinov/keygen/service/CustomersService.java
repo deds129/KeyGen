@@ -8,7 +8,7 @@ public interface CustomersService {
 	
 	List<Customer> getAllCustomers();
 
-	void saveNewCustomer(Customer customer);
+	void saveCustomer(Customer customer);
 
 	Customer getCustomerById(int id);
 

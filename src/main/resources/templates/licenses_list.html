@@ -11,22 +11,23 @@
 <div th:insert="_layout :: html_navbar"></div>
 
 <div class="container mb-4">
-	
+
 	<div>
 		<h3>Licenses</h3>
 	</div>
-	
+
 	<br>
 	<!-- Search Field -->
 	<div>
 		<form class="form-inline" method="get">
-			<input class="form-control mr-sm-2" type="search" name="searchStr" placeholder="Search" aria-label="Customer">
+			<input class="form-control mr-sm-2" type="search" name="searchStr" placeholder="Customer"
+				   aria-label="Customer">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
 	</div>
-	
+
 	<br>
-	
+
 	<!-- Licenses table -->
 	<div>
 		<table class="table table-striped container-fluid">
@@ -75,9 +76,10 @@
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal"
 								th:data-target="'#modalButton' + ${license.id}">
-							<img src="/static/bootstrap-icons-1.8.1/eye-fill.svg" alt="Bootstrap" width="20" height="16">
+							<img src="/static/bootstrap-icons-1.8.1/eye-fill.svg" alt="Bootstrap" width="20"
+								 height="16">
 						</button>
-						
+
 						<!-- Modal -->
 						<div class="modal fade" th:id="'modalButton' + ${license.id}" tabindex="-1" role="dialog"
 							 aria-hidden="true">
@@ -90,32 +92,49 @@
 										</button>
 									</div>
 									<div class="modal-body">
-										<p th:id="licKey + ${license.id}" style="word-break: break-all" th:utext="${license.key}">Key</p>
+										<p th:id="licKey + ${license.id}" style="word-break: break-all"
+										   th:utext="${license.key}">Key</p>
 									</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										<!-- add js script for key copy: dynamic thymeleaf parameter problem now its empty-->
-										<button onclick=copyToClipboard1() type="button" class="btn btn-primary">Copy to clipboard</button>
-										
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+										</button>
+										<!--todo add js script for key copy: dynamic thymeleaf parameter problem now its empty-->
+										<button onclick=copyToClipboard1() type="button" class="btn btn-primary">Copy to
+											clipboard
+										</button>
+
 									</div>
 								</div>
 							</div>
 						</div>
+
+						<form name="license" th:action="@{/deleteLicense}" method="post">
+							<input type="hidden" name="licId" th:value="${license.id}"/>
+							<button type="submit" class="btn btn-outline-danger">
+								<img src="/static/bootstrap-icons-1.8.1/x-circle-fill.svg" alt="Bootstrap" width="16"
+									 height="16">
+							</button>
+						</form>
+
+
+						<form name="license" th:action="@{/updateLicense}" method="post">
+							<input type="hidden" name="licId" th:value="${license.id}"/>
+							<button type="submit" class="btn btn-outline-info">
+								<img src="/static/bootstrap-icons-1.8.1/vector-pen.svg" alt="Bootstrap" width="16"
+									 height="16">
+							</button>
+						</form>
 						
-							<form name="license" th:action="@{/deleteLicense}" method="post">
-								<input type="hidden" name="licId" th:value="${license.id}"/>
-								<button type="submit" class="btn btn-outline-danger">
-									<img src="/static/bootstrap-icons-1.8.1/x-circle-fill.svg" alt="Bootstrap" width="16" height="16">
-								</button>
-							</form>
-						
-						
-							<form name="license" th:action="@{/updateLicense}" method="post">
-								<input type="hidden" name="licId" th:value="${license.id}"/>
-								<button type="submit" class="btn btn-outline-info">
-									<img src="/static/bootstrap-icons-1.8.1/vector-pen.svg" alt="Bootstrap" width="16" height="16">
-								</button>
-							</form>
+						<!-- todo send key as mail -->
+						<form name="license"  method="post">
+							<input type="hidden" name="licId" th:value="${license}"/>
+							<button type="submit" class="btn btn-outline-danger">
+								<img src="/static/bootstrap-icons-1.8.1/mailbox.svg" alt="Bootstrap" width="16"
+									 height="16">
+							</button>
+						</form>
+
+
 					</div>
 				</td>
 			</tr>
@@ -123,10 +142,7 @@
 	</div>
 
 	<div>
-		<button type="button" class="btn btn-outline-danger" onclick="window.location.href = 'addLicense'">Add new
-			License
-			Key
-		</button>
+		<button type="button" class="btn btn-outline-danger" onclick="window.location.href = 'addLicense'">Add new License Key</button>
 	</div>
 
 </div>

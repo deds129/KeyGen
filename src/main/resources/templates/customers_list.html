@@ -1,0 +1,62 @@
+<html lang="java" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="_layout :: html_head">
+	<title>Customers</title>
+</head>
+
+<div th:replace="_layout :: html_navbar"></div>
+
+<body>
+<div class="container mb-4">
+	<h3>List of Customers</h3>
+	<table class="table table-striped container-fluid">
+		<thead class="thead-light">
+		
+		<tr>
+			<th scope="col">ID</th>
+			<th scope="col">NAME</th>
+			<th scope="col">COMPANY</th>
+			<th scope="col">EMAIL</th>
+			<th scope="col">PHONE</th>
+			<th scope="col">SITE</th>
+			<th scope="col">OPTIONS</th>
+			<!--th scope="col">KEYS</th-->
+		</tr>
+		</thead>
+		
+		<tr th:each="customer, state : ${customers}">
+			<td th:utext="${customer.id}">ID</td>
+			<td th:utext="${customer.custName}">NAME</td>
+			<td th:utext="${customer.custCompName}">COMPANY</td>
+			<td th:utext="${customer.custEmail}">EMAIL</td>
+			<td th:utext="${customer.custPhone}">TEL</td>
+			<td th:utext="${customer.custWebsite}">SITE</td>
+			<td>
+				<a class="btn btn-info" th:href="@{/customers/{id}(id = ${customer.id})}" role="button">Edit</a>
+				<!-- user deleting supported by post request -->
+				
+				<a class="btn btn-danger" th:href="@{/customers/deleteCustomer/{id}(id = ${customer.id})}" role="button">Delete</a>
+			</td>
+		</tr>
+		
+	</table>
+	<!--todo: button or input -->
+	<a class="btn btn-primary" th:href="@{/customers/addCustomer/}" role="button">Add new Customer</a>
+</div>
+
+
+
+<!--form name="license" th:action="@{/updateLicense}" method="post">
+	<input type="hidden" name="licId" th:value="${license.id}"/>
+	<button type="submit" class="btn btn-outline-info">
+		<img src="/static/bootstrap-icons-1.8.1/vector-pen.svg" alt="Bootstrap" width="16"
+			 height="16">
+	</button>
+</form-->
+
+
+</body>
+</html>
+
+
+<!--todo add customer list page + options-->

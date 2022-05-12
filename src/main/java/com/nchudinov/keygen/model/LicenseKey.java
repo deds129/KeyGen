@@ -22,6 +22,8 @@ import java.util.stream.Collectors;
 @Table(name = "license_keys")
 public class LicenseKey {
 	
+	//todo add fileds validation
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")

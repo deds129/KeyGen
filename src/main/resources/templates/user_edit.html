@@ -2,11 +2,10 @@
 <html lang="java" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="_layout :: html_head">
-	<title>User Edit</title>
+	<title>User Details</title>
 </head>
 
 <body>
-
 
 <div th:replace="_layout :: html_navbar"></div>
 
@@ -28,7 +27,7 @@
 							<img class="avatar img-circle img-thumbnail"
 								 th:src="@{'/static/img/' + ${user.fileName}}" alt="avatar">
 						</div>
-						
+
 						<!-- default user profile image -->
 						<div class="user_avatar align-center" th:unless="${user.fileName}">
 							<img class="avatar img-circle img-thumbnail"
@@ -46,7 +45,7 @@
 
 			<!-- Account details card-->
 			<div class="col-xl-8">
-				<div class="card mb-4">
+					<div class="card mb-4">
 					<div class="card-header">Account Details</div>
 					<div class="card-body">
 						<form>
@@ -99,7 +98,7 @@
 
 								<div class="col-md-6">
 									<label for="emailInput">Email</label>
-									<input type="text" class="form-control" id="emailInput" th:field="${user.email}"
+									<input type="email" class="form-control" id="emailInput" th:field="${user.email}"
 										   aria-describedby="emailHelp" placeholder="Enter user login">
 									<small id="emailHelp" class="form-text text-muted">
 										We'll never share your email with anyone else
@@ -109,15 +108,37 @@
 								<div class="col-md-6">
 									<!-- Form phone-->
 									<label for="phoneInput">Phone</label>
-									<input type="text" class="form-control" id="phoneInput"
+									<input type="tel" class="form-control" id="phoneInput"
 										   th:field="${user.phoneNumber}" aria-describedby="loginHelp"
 										   placeholder="Enter user phone number">
 									<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
 								</div>
 
 							</div>
+							<!--todo place to user roles -->
+							<!--todo place to user firstname + secondname -->
+
 							<!-- Form Group user enabled in system-->
-							<div class="mb-3">
+							<div class="row gx-3 mb-3">
+								<!--div class="col-md-6">
+									<th:block th:each="role : ${roles}">
+										<div class="form-check">
+											<label class="form-check-label">
+												<input type="checkbox" th:value="${role}" th:field="${user.roles}"/>
+												<label th:text="${role.name()}"></label>
+											</label>
+										</div>
+									</th:block>
+								</div-->
+
+								<div class="col-md-6">
+									<label class="form-check-label" for="selectRole">Select customer:</label>
+										<select id="selectRole" class="form-control" th:field="${user.roles}">
+											<option th:each="role: ${roles}" th:text="${role.name()}"
+													th:value="${role}"></option>
+										</select>
+								</div>
+
 								<div class="col-md-6">
 									<input class="form-check-input" type="checkbox" th:field="${user.active}"
 										   id="isActiveCheckBox">
@@ -125,19 +146,17 @@
 										User is active
 									</label>
 								</div>
+								
 							</div>
-
-							<!--todo place to user roles -->
-							<!--todo place to user firstname + secondname -->
-
+							
 							<!-- Save changes button-->
 							<br>
-							
+
 							<div>
 								<input type="hidden" name="user" th:value="${user}"/>
-								<input type="submit" value="Save User"/>
+								<input class="btn btn-primary" type="submit" value="Save User"/>
 							</div>
-							
+
 						</form>
 					</div>
 				</div>

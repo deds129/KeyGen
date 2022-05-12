@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="java" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="_layout :: html_head">
+	<title>Customer details</title>
+</head>
+
+<body>
+
+<div th:replace="_layout :: html_navbar"></div>
+<!--it can be creating new customer or updating existing customer -->
+<div class="container">
+	<div class="col-xl-8">
+		<div class="card mb-4">
+			<!-- -->
+			<form action="#"
+				  th:action="@{/saveCustomer}"
+				  th:object="${customer}"
+				  enctype="multipart/form-data"
+				  method="post">
+
+				<div class="card-header">Customer Details</div>
+
+				<div>
+					<input type="hidden" th:field="${customer.id}"/>
+				</div>
+
+				<div class="mb-3">
+					<label for="nameInput">Client company representative</label>
+					<input type="text" class="form-control" id="nameInput" th:field="${customer.custName}"
+						   aria-describedby="nameHelp" placeholder="Enter customer name">
+					<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
+				</div>
+
+				<div class="row gx-3 mb-3">
+					<div class="col-md-6">
+						<label for="emailInput">Email</label>
+						<input type="email" class="form-control" id="emailInput" th:field="${customer.custEmail}"
+							   aria-describedby="emailHelp" placeholder="Enter user email">
+						<small id="emailHelp" class="form-text text-muted">We'll never share customer email with anyone
+							else.</small>
+					</div>
+
+					<div class="col-md-6">
+						<label for="phoneInput">Phone</label>
+						<input type="tel" class="form-control" id="phoneInput" th:field="${customer.custPhone}"
+							   aria-describedby="emailHelp" placeholder="Enter user phone number">
+						<small id="phoneHelp" class="form-text text-muted">We'll never share customer phone with anyone
+							else.</small>
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<label for="siteInput">Customer Website</label>
+					<input type="url" class="form-control" id="siteInput" th:field="${customer.custWebsite}"
+						   aria-describedby="siteHelp" placeholder="Enter user website">
+					<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
+				</div>
+
+				<div class="mb-3">
+					<label for="compInput">Customer company name</label>
+					<input type="text" class="form-control" id="compInput" th:field="${customer.custCompName}"
+						   aria-describedby="compHelp" placeholder="Enter user website">
+					<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
+				</div>
+
+				<div>
+					<input type="hidden" name="user" th:value="${customer}"/>
+					<input class="btn btn-primary" type="submit" value="Save Customer"/>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+</div>
+
+</body>
+
+</html>
+
+<!--todo add customer edit page -->

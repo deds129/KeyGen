@@ -2,7 +2,7 @@ package com.nchudinov.keygen.controller;
 
 import com.nchudinov.keygen.model.Role;
 import com.nchudinov.keygen.model.User;
-import com.nchudinov.keygen.repository.UserRepository;
+import com.nchudinov.keygen.service.impls.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -22,12 +22,12 @@ public class UserController {
 	private String uploadPath;
 	
 	@Autowired
-	private UserRepository userService;
+	private UserServiceImpl userService;
 	
 	@GetMapping
 	private String userList(Model model){
 		model.addAttribute("users", userService.findAll());
-		return "user_list";
+		return "users_list";
 	}
 
 	@GetMapping("/registration")
@@ -40,7 +40,7 @@ public class UserController {
 	
 	@GetMapping("{usrId}")
 	private String editUser(@PathVariable("usrId") long id, Model model ){
-		User user = userService.findById(id)
+		User user = userService.loadUserById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 		
 		model.addAttribute("user", user );

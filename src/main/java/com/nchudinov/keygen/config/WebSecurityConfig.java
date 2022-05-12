@@ -21,15 +21,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
+				//todo /users/** mapping only for user that has a admin role (now doesn't work)
+					.antMatchers("/users","/users/**").hasRole("ADMIN")
 					.antMatchers("/login","/static/**").permitAll()
-					.anyRequest().authenticated()
+				.anyRequest().authenticated()
 				.and()
 					.formLogin()
 					.loginPage("/login")
 					.permitAll()
 				.and()
 					.logout()
-					.permitAll();
+					.permitAll();			
 	}
 
 	@Override

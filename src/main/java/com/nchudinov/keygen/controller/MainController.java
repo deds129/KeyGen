@@ -45,7 +45,7 @@ public class MainController {
 		
 		model.addAttribute("allLicenses", licenseKeys);
 		model.addAttribute("searchStr", searchStr);
-		return "admin_panel";
+		return "licenses_list";
 	}
 	
 	@ModelAttribute("licenseTypes")
@@ -77,7 +77,7 @@ public class MainController {
 	public String add(Model model) {
 		LicenseKey licenseKey = new LicenseKey();
 		model.addAttribute("license", licenseKey);
-		return "add_new_license";
+		return "license_edit";
 	}
 
 	@PostMapping("/updateLicense")
@@ -85,7 +85,7 @@ public class MainController {
 		LicenseKey licenseKey = licenseKeyService.getLicenseById(id);
 		//must pass attribute with the same name
 		model.addAttribute("license", licenseKey);
-		return "add_new_license";
+		return "license_edit";
 	}
 	
 	@PostMapping("/saveLicense")
