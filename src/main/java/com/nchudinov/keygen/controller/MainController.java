@@ -3,6 +3,7 @@ package com.nchudinov.keygen.controller;
 import com.nchudinov.keygen.model.*;
 import com.nchudinov.keygen.service.*;
 import com.nchudinov.keygen.service.impls.CustomersServiceImpl;
+import com.nchudinov.keygen.service.impls.MailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,9 @@ public class MainController {
 
 	@Autowired
 	private CustomersServiceImpl customersService;
+	
+	@Autowired
+	private MailSender mailSender; 
 	
 	@GetMapping("/")
 	public String show(@RequestParam(required = false) String searchStr, Model model) {
@@ -84,6 +88,9 @@ public class MainController {
 	public String  updateLicense(@RequestParam("licId") int id, Model model) {
 		LicenseKey licenseKey = licenseKeyService.getLicenseById(id);
 		//must pass attribute with the same name
+		if (licenseKey == null) {
+			//todo error handling
+		}
 		model.addAttribute("license", licenseKey);
 		return "license_edit";
 	}
@@ -111,5 +118,33 @@ public class MainController {
 		licenseKeyService.deleteLicenseById(id);
 		return "redirect:/";
 	}
-	
+
+	@PostMapping("/sendKeyByMail")
+	public String  sendLicense(@RequestParam("licId") int id, Model model) {
+		LicenseKey licenseKey = licenseKeyService.getLicenseById(id);
+		if (licenseKey == null) {
+			//put error message in model
+		}
+		
+		Customer customer = customersService.getCustomerById(licenseKey.getCustomer().getId());
+		
+		if (customer == null) {
+			//put error message in model
+		}
+		
+		String customerMail =  customer.getCustEmail(); //not null validation on front
+		
+		if (customerMail != null) {
+			String message = String.format(
+					"Hello, %s \n" +
+							"Thanks for choosing DA Firewall \n" +
+							"Your license key: %s",
+			customer.getCustName(), licenseKey.getKey());
+			
+			mailSender.sendMessage(customerMail, "License Key", message);
+		}
+		//must pass attribute with the same name
+		//model.addAttribute("success_message", licenseKey);
+		return "redirect:/";
+	}
 }

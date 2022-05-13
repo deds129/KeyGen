@@ -125,15 +125,18 @@
 									 height="16">
 							</button>
 						</form>
-						
+
 						<!-- todo send key as mail -->
-						<form name="license"  method="post">
-							<input type="hidden" name="licId" th:value="${license}"/>
+						<form name="license" th:action="@{/sendKeyByMail}"  method="post">
+							<input type="hidden" name="licId" th:value="${license.id}"/>
 							<button type="submit" class="btn btn-outline-danger">
 								<img src="/static/bootstrap-icons-1.8.1/mailbox.svg" alt="Bootstrap" width="16"
 									 height="16">
 							</button>
 						</form>
+
+					
+						
 
 
 					</div>
