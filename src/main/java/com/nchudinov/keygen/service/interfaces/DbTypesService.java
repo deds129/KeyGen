@@ -1,4 +1,4 @@
-package com.nchudinov.keygen.service;
+package com.nchudinov.keygen.service.interfaces;
 
 import com.nchudinov.keygen.model.DbType;
 

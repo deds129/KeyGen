@@ -2,7 +2,7 @@ package com.nchudinov.keygen.service.impls;
 
 import com.nchudinov.keygen.model.LicenseType;
 import com.nchudinov.keygen.repository.LicenseTypesRepository;
-import com.nchudinov.keygen.service.LicenseTypesService;
+import com.nchudinov.keygen.service.interfaces.LicenseTypesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -3,12 +3,11 @@ package com.nchudinov.keygen.service.impls;
 import com.nchudinov.keygen.handlers.KeyGenerator;
 import com.nchudinov.keygen.model.LicenseKey;
 import com.nchudinov.keygen.repository.LicenseKeyRepository;
-import com.nchudinov.keygen.service.LicenseKeyService;
+import com.nchudinov.keygen.service.interfaces.LicenseKeyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class LicenseKeyServiceImpl implements LicenseKeyService {

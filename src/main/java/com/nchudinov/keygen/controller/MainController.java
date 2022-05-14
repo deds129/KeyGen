@@ -1,9 +1,9 @@
 package com.nchudinov.keygen.controller;
 
 import com.nchudinov.keygen.model.*;
-import com.nchudinov.keygen.service.*;
 import com.nchudinov.keygen.service.impls.CustomersServiceImpl;
 import com.nchudinov.keygen.service.impls.MailSender;
+import com.nchudinov.keygen.service.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

@@ -3,7 +3,7 @@ package com.nchudinov.keygen.service.impls;
 import com.nchudinov.keygen.mappers.CustomerMapper;
 import com.nchudinov.keygen.model.Customer;
 import com.nchudinov.keygen.repository.CustomersRepository;
-import com.nchudinov.keygen.service.CustomersService;
+import com.nchudinov.keygen.service.interfaces.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
