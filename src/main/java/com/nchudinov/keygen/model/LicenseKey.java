@@ -47,7 +47,8 @@ public class LicenseKey {
 	@Column(name = "port")
 	private Integer port;
 	
-	@Column(name = "lic_key")
+	@Lob
+	@Column(name = "lic_key", length = 2048)
 	private String key;
 	
 	@Column(name = "lic_comment")
