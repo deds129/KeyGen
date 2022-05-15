@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -52,6 +53,7 @@ public class LicenseKey {
 	private String key;
 	
 	@Column(name = "lic_comment")
+	@Length(max = 2048, message = "Comment too long")
 	private String comment;
 	
 	@Column(name ="start_date")

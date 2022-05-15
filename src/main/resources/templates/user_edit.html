@@ -51,16 +51,20 @@
 						<form>
 							<!-- hidden user id -->
 							<div>
-								<input type="hidden" th:field="${user.id}"/>
+								<input type="hidden" th:field="*{id}"/>
 							</div>
 
 
 							<!-- Form Group (username)-->
 							<div class="mb-3">
 								<label for="loginInput">Login</label>
-								<input type="text" class="form-control" id="loginInput" th:field="${user.username}"
+								<input id="username" type="text" class="form-control" id="loginInput" th:field="*{username}"
 									   aria-describedby="loginHelp" placeholder="Enter user login">
 								<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
+								<div class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:class="${#fields.hasErrors('username')}? error"
+									 th:errors="${user.username}">
+									Please provide a valid city.
+								</div>
 							</div>
 
 
@@ -71,7 +75,7 @@
 								<div class="col-md-6">
 									<label for="passwordInput">Password</label>
 									<input type="password" class="form-control" id="passwordInput"
-										   th:field="${user.password}" aria-describedby="passwordHelp"
+										   th:field="*{password}" aria-describedby="passwordHelp"
 										   placeholder="Enter user password">
 									<small id="passwordHelp" class="form-text text-muted">
 										Your password must be 8-20 characters long, contain letters and numbers, and
@@ -98,7 +102,7 @@
 
 								<div class="col-md-6">
 									<label for="emailInput">Email</label>
-									<input type="email" class="form-control" id="emailInput" th:field="${user.email}"
+									<input type="email" class="form-control" id="emailInput" th:field="*{email}"
 										   aria-describedby="emailHelp" placeholder="Enter user login">
 									<small id="emailHelp" class="form-text text-muted">
 										We'll never share your email with anyone else
@@ -109,7 +113,7 @@
 									<!-- Form phone-->
 									<label for="phoneInput">Phone</label>
 									<input type="tel" class="form-control" id="phoneInput"
-										   th:field="${user.phoneNumber}" aria-describedby="loginHelp"
+										   th:field="*{phoneNumber}" aria-describedby="loginHelp"
 										   placeholder="Enter user phone number">
 									<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
 								</div>

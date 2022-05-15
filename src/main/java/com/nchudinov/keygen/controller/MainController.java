@@ -8,10 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -97,7 +103,15 @@ public class MainController {
 	
 	@PostMapping("/saveLicense")
 	public String saveLicense(@AuthenticationPrincipal User user,
-							  @ModelAttribute("license") LicenseKey licenseKey) {
+							  @Valid @ModelAttribute("license") LicenseKey licenseKey,
+							  BindingResult bindingResult, //always before model
+							  Model model) {
+		if (bindingResult.hasErrors()) {
+
+			Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+			model.mergeAttributes(errorsMap);
+		} else {
+			
 		Customer customer = licenseKey.getCustomer();
 		LicenseType licenseType = licenseKey.getLicenseType();
 		
@@ -110,9 +124,12 @@ public class MainController {
 		licenseKey.setLicenseType(licenseTypeFromDb);
 		licenseKey.setAuthor(user);
 		licenseKeyService.saveLicenseKey(licenseKey);
+		}
 		return "redirect:/";
 	}
+
 	
+
 	@PostMapping("/deleteLicense")
 	public String deleteLicense(@RequestParam("licId") int id, Model model) {
 		licenseKeyService.deleteLicenseById(id);

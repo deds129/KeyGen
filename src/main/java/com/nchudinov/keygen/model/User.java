@@ -2,10 +2,13 @@ package com.nchudinov.keygen.model;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Set;
 
@@ -18,13 +21,26 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@NotBlank(message = "Username cannot be empty")
+	@Length(max = 100, min = 2, message = "Username has to be in range [2 - 100]")
 	private String username;
+
+	@NotBlank(message = "Password cannot be empty")
 	private String password;
+
+	@Transient
+	@NotBlank(message = "Password confirmation cannot be empty")
+	private String password2;
+	
 	private boolean active;
 	
 	private String fileName;
-	
+
+	@Email(message = "Email is not correct")
+	@NotBlank(message = "Username cannot be empty")
 	private String email;
+	
 	private String phoneNumber;
 	private String activationCode;
 	
@@ -129,5 +145,13 @@ public class User implements UserDetails {
 
 	public void setFileName(String avatar) {
 		this.fileName = avatar;
+	}
+
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
 	}
 }
