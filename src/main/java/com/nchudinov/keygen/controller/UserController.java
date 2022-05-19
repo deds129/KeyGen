@@ -7,11 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -49,7 +53,12 @@ public class UserController {
 	}
 
 	@PostMapping("/saveUser")
-	private String saveUpdatedUser(User user, @RequestParam("file") MultipartFile file) throws IOException {
+	private String saveUpdatedUser(@Valid User user, Errors errors,
+								   @RequestParam("file") MultipartFile file,
+								   Model model) throws IOException {
+		if (errors != null && errors.hasErrors()) {
+			return "user_edit";
+		}
 		
 		if (file != null && !file.getOriginalFilename().isEmpty()) {
 			File uploadDir = new File(uploadPath);

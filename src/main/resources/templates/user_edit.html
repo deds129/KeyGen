@@ -53,18 +53,16 @@
 							<div>
 								<input type="hidden" th:field="*{id}"/>
 							</div>
-
-
+							
 							<!-- Form Group (username)-->
 							<div class="mb-3">
 								<label for="loginInput">Login</label>
-								<input id="username" type="text" class="form-control" id="loginInput" th:field="*{username}"
+								<input type="text" class="form-control" id="loginInput" th:field="*{username}"
 									   aria-describedby="loginHelp" placeholder="Enter user login">
-								<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
-								<div class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:class="${#fields.hasErrors('username')}? error"
-									 th:errors="${user.username}">
-									Please provide a valid city.
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+									Username error!
 								</div>
+								<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
 							</div>
 
 
@@ -77,6 +75,9 @@
 									<input type="password" class="form-control" id="passwordInput"
 										   th:field="*{password}" aria-describedby="passwordHelp"
 										   placeholder="Enter user password">
+									<div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+										Password error!
+									</div>
 									<small id="passwordHelp" class="form-text text-muted">
 										Your password must be 8-20 characters long, contain letters and numbers, and
 										must not contain spaces, special characters, or emoji.
@@ -89,6 +90,9 @@
 									<input type="password" class="form-control" id="confirmPasswordInput"
 										   value="" aria-describedby="confirmHelp"
 										   placeholder="Confirm password">
+									<div class="alert alert-danger" th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}">
+										Confirmation error!!!
+									</div>
 									<small id="confirmHelp" class="form-text text-muted">
 										Your password must be 8-20 characters long, contain letters and numbers, and
 										must not contain spaces, special characters, or emoji.
@@ -104,6 +108,9 @@
 									<label for="emailInput">Email</label>
 									<input type="email" class="form-control" id="emailInput" th:field="*{email}"
 										   aria-describedby="emailHelp" placeholder="Enter user login">
+									<div class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+										Invalid email!
+									</div>
 									<small id="emailHelp" class="form-text text-muted">
 										We'll never share your email with anyone else
 									</small>
@@ -115,13 +122,15 @@
 									<input type="tel" class="form-control" id="phoneInput"
 										   th:field="*{phoneNumber}" aria-describedby="loginHelp"
 										   placeholder="Enter user phone number">
+									<div class="alert alert-danger" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">
+										Invalid phone number!
+									</div>
 									<!-- small id="loginHelp" class="form-text text-muted">We'll never share your email with anyone else.</small-->
 								</div>
+								
 
 							</div>
-							<!--todo place to user roles -->
-							<!--todo place to user firstname + secondname -->
-
+							
 							<!-- Form Group user enabled in system-->
 							<div class="row gx-3 mb-3">
 								<!--div class="col-md-6">
@@ -136,7 +145,7 @@
 								</div-->
 
 								<div class="col-md-6">
-									<label class="form-check-label" for="selectRole">Select customer:</label>
+									<label class="form-check-label" for="selectRole">Select role:</label>
 									<select id="selectRole" class="form-control" th:field="${user.roles}">
 										<option th:each="role: ${roles}" th:text="${role.name()}"
 												th:value="${role}"></option>

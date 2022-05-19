@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.Set;
 
@@ -22,15 +23,16 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@NotBlank(message = "Username cannot be empty")
+	@NotEmpty(message = "Username cannot be empty")
 	@Length(max = 100, min = 2, message = "Username has to be in range [2 - 100]")
 	private String username;
 
-	@NotBlank(message = "Password cannot be empty")
+	@NotEmpty(message = "Password cannot be empty")
+	@Length(min = 8, message = "Minimum password length is 8 characters")
 	private String password;
-
+	
+	@Length(min = 8, message = "Minimum password length is 8 characters")
 	@Transient
-	@NotBlank(message = "Password confirmation cannot be empty")
 	private String password2;
 	
 	private boolean active;
@@ -41,7 +43,9 @@ public class User implements UserDetails {
 	@NotBlank(message = "Username cannot be empty")
 	private String email;
 	
+	@NotBlank(message = "Phone number cannot be empty")
 	private String phoneNumber;
+	
 	private String activationCode;
 	
 	@ElementCollection(targetClass =  Role.class, fetch = FetchType.EAGER)

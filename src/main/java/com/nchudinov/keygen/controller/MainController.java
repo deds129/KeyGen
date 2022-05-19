@@ -107,9 +107,7 @@ public class MainController {
 							  BindingResult bindingResult, //always before model
 							  Model model) {
 		if (bindingResult.hasErrors()) {
-
-			Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
-			model.mergeAttributes(errorsMap);
+			return "license_edit";
 		} else {
 			
 		Customer customer = licenseKey.getCustomer();
