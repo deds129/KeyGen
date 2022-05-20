@@ -5,7 +5,13 @@ import com.nchudinov.keygen.service.interfaces.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 public class CustomerController {
@@ -39,7 +45,11 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/saveCustomer")
-	private String updateCustomer(@ModelAttribute("customer") Customer customer) {
+	private String updateCustomer(@ModelAttribute("customer") @Valid Customer customer, Errors errors, Model model) {
+		
+		if (errors != null && errors.hasErrors()) {
+			return "customer_edit";
+		}
 		customersService.saveCustomer(customer);
 		return "redirect:/customers";
 	}

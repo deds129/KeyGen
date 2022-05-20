@@ -8,6 +8,9 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -30,21 +33,28 @@ public class LicenseKey {
 	@Column(name = "id")
 	private Integer id;
 	
+	@NotEmpty
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "customer")
 	private Customer customer;
 
+	@NotEmpty
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "usr_id")
 	private User author;
 
+	@NotEmpty
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "license_type")
 	private LicenseType licenseType;
-	
+
+	@NotEmpty
 	@Column(name = "host")
 	private String host;
 
+	@Min(0)
+	@Max(65535)
+	@NotEmpty
 	@Column(name = "port")
 	private Integer port;
 	
