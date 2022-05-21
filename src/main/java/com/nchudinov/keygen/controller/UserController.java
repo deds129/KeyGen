@@ -57,6 +57,7 @@ public class UserController {
 								   @RequestParam("file") MultipartFile file,
 								   Model model) throws IOException {
 		if (errors != null && errors.hasErrors()) {
+			model.addAttribute("roles", Role.values());
 			return "user_edit";
 		}
 		

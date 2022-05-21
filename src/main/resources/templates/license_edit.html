@@ -26,11 +26,17 @@
 					<h5 class="card-title">Customer parameters</h5>
 					<label>Select customer:
 						<select class="form-control" th:field="*{customer.id}">
-							<option value=-1 disabled = "disabled" selected="selected">Select Customer</option>
+							<option value=-1 disabled="disabled" selected="selected">Select Customer</option>
 							<option th:each="customer: ${customers}" th:text="${customer.custName}"
 									th:value="${customer.id} "></option>
 						</select>
 					</label>
+					<!--small>
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('customer.id')}"
+							 th:errors="*{customer.id}">
+							Please select option!
+						</div>
+					</small-->
 				</div>
 			</div>
 
@@ -44,6 +50,12 @@
 									th:value="${type.id}"></option>
 						</select>
 					</label>
+					<small>
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('licenseType.id')}"
+							 th:errors="*{licenseType.id}">
+							Please select option!
+						</div>
+					</small>
 				</div>
 			</div>
 
@@ -53,14 +65,20 @@
 					<th:block th:each="operSystem : ${operSystems}">
 						<div class="form-check">
 							<label class="form-check-label">
-								<input type="checkbox" th:value="${operSystem.id}" th:field="${license.osTypes}"/>
+								<input type="checkbox" th:value="${operSystem.id}" th:field="*{osTypes}"/>
 								<label th:text="${operSystem.osTitle}"></label>
 							</label>
 						</div>
 					</th:block>
+					<small>
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('osTypes')}"
+							 th:errors="*{osTypes}">
+							Please select at least option!
+						</div>
+					</small>
 				</div>
 			</div>
-			
+
 			<!--todo add add dbTypes -->
 			<div class="card">
 				<div class="card-body">
@@ -68,14 +86,20 @@
 					<th:block th:each="dbType : ${dbTypes}">
 						<div class="form-check">
 							<label class="form-check-label">
-								<input type="checkbox" th:value="${dbType.id}" th:field="${license.dbTypes}"/>
+								<input type="checkbox" th:value="${dbType.id}" th:field="*{dbTypes}"/>
 								<label th:text="${dbType.dbTitle}"></label>
 							</label>
 						</div>
 					</th:block>
+					<small>
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('dbTypes')}"
+							 th:errors="*{dbTypes}">
+							Please select at least option!
+						</div>
+					</small>
 				</div>
 			</div>
-			
+
 
 			<div class="card">
 				<div class="card-body">
@@ -83,11 +107,17 @@
 					<th:block th:each="feature : ${features}">
 						<div class="form-check">
 							<label class="form-check-label">
-								<input type="checkbox" th:value="${feature.id}" th:field="${license.features}"/>
+								<input type="checkbox" th:value="${feature.id}" th:field="*{features}"/>
 								<label th:text="${feature.featureTitle}"></label>
 							</label>
 						</div>
 					</th:block>
+					<small>
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('features')}"
+							 th:errors="*{features}">
+							Please select at least option!
+						</div>
+					</small>
 				</div>
 			</div>
 
@@ -95,14 +125,23 @@
 				<div class="card-body">
 					<h5 class="card-title">Host & Port</h5>
 					<div class="form-group form-row">
-						<label>
-							<input class="form-control" type="text" th:field="*{host}" placeholder="Host"/>
-						</label>
+
+						<input class="form-control" type="text" th:field="*{host}" placeholder="Host"/>
+						<small>
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('host')}"
+								 th:errors="*{host}">
+								Please select at least option!
+							</div>
+						</small>
 					</div>
 					<div class="form-group form-row">
-						<label>
-							<input class="form-control" type="number" th:field="*{port}" placeholder="Port"/>
-						</label>
+						<input class="form-control" type="number" th:field="*{port}" placeholder="Port"/>
+						<small>
+							<div class="alert alert-danger" th:if="${#fields.hasErrors('port')}"
+								 th:errors="*{port}">
+								Incorrect port range
+							</div>
+						</small>
 					</div>
 				</div>
 			</div>

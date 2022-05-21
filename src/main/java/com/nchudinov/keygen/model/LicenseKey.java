@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -33,32 +32,28 @@ public class LicenseKey {
 	@Column(name = "id")
 	private Integer id;
 	
-	@NotEmpty
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "customer")
 	private Customer customer;
-
-	@NotEmpty
+	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "usr_id")
 	private User author;
 
-	@NotEmpty
+	@NotNull(message = "Field cannot be empty")
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "license_type")
 	private LicenseType licenseType;
 
-	@NotEmpty
+	@NotBlank(message = "Field has not to be blank")
 	@Column(name = "host")
 	private String host;
 
-	@Min(0)
-	@Max(65535)
-	@NotEmpty
+	@Min(value = 0, message = "Min value is 1")
+	@Max(value = 65535, message = "Max value is 65535")
 	@Column(name = "port")
 	private Integer port;
 	
-	@Lob
 	@Column(name = "lic_key", length = 2048)
 	private String key;
 	
@@ -74,18 +69,21 @@ public class LicenseKey {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
 	
+	@NotEmpty(message = "Choose at least one option")
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "feature_to_key",
 			joinColumns = @JoinColumn(name = "key_id"),
 			inverseJoinColumns = @JoinColumn(name = "feature_id"))
 	private Set<Feature> features = new LinkedHashSet<>();
-	
+
+	@NotEmpty(message = "Choose at least one option")
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "db_to_key",
 			joinColumns = @JoinColumn(name = "key_id"),
 			inverseJoinColumns = @JoinColumn(name = "db_type"))
 	private Set<DbType> dbTypes = new LinkedHashSet<>();
-	
+
+	@NotEmpty(message = "Choose at least one option")
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinTable(name = "os_to_key",
 	joinColumns = @JoinColumn(name = "key_id"),

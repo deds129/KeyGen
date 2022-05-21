@@ -9,10 +9,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -108,24 +105,22 @@ public class MainController {
 		if (errors.hasErrors()) {
 			return "license_edit";
 		} else {
-			
-		Customer customer = licenseKey.getCustomer();
-		LicenseType licenseType = licenseKey.getLicenseType();
-		
-		//get entities from db
-		Customer custFromDb = customersService.getCustomerById(customer.getId());
-		LicenseType licenseTypeFromDb = licenseTypesService.getLicenseTypeById(licenseType.getId());
-		
-		//add entities to license keys
-		licenseKey.setCustomer(custFromDb);
-		licenseKey.setLicenseType(licenseTypeFromDb);
-		licenseKey.setAuthor(user);
-		licenseKeyService.saveLicenseKey(licenseKey);
+			Customer customer = licenseKey.getCustomer();
+			LicenseType licenseType = licenseKey.getLicenseType();
+
+			//get entities from db
+			Customer custFromDb = customersService.getCustomerById(customer.getId());
+			LicenseType licenseTypeFromDb = licenseTypesService.getLicenseTypeById(licenseType.getId());
+
+			//add entities to license keys
+			licenseKey.setCustomer(custFromDb);
+			licenseKey.setLicenseType(licenseTypeFromDb);
+			licenseKey.setAuthor(user);
+			licenseKeyService.saveLicenseKey(licenseKey);
 		}
 		return "redirect:/";
 	}
 
-	
 
 	@PostMapping("/deleteLicense")
 	public String deleteLicense(@RequestParam("licId") int id, Model model) {
@@ -134,27 +129,27 @@ public class MainController {
 	}
 
 	@PostMapping("/sendKeyByMail")
-	public String  sendLicense(@RequestParam("licId") int id, Model model) {
+	public String sendLicense(@RequestParam("licId") int id, Model model) {
 		LicenseKey licenseKey = licenseKeyService.getLicenseById(id);
 		if (licenseKey == null) {
 			//put error message in model
 		}
-		
+
 		Customer customer = customersService.getCustomerById(licenseKey.getCustomer().getId());
-		
+
 		if (customer == null) {
 			//put error message in model
 		}
-		
-		String customerMail =  customer.getCustEmail(); //not null validation on front
-		
+
+		String customerMail = customer.getCustEmail(); //not null validation on front
+
 		if (customerMail != null) {
 			String message = String.format(
 					"Hello, %s \n" +
 							"Thanks for choosing DA Firewall \n" +
 							"Your license key: %s",
-			customer.getCustName(), licenseKey.getKey());
-			
+					customer.getCustName(), licenseKey.getKey());
+
 			mailSender.sendMessage(customerMail, "License Key", message);
 		}
 		//must pass attribute with the same name
