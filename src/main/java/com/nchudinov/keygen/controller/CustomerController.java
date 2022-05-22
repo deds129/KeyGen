@@ -30,7 +30,7 @@ public class CustomerController {
 		//todo add norm handling
 		Customer customer = customersService.getCustomerById(id);
 		if (customer == null) {
-			model.addAttribute("error", "user not found!");
+			model.addAttribute("error", "User not found!");
 		}
 		model.addAttribute("customer", customer );
 		return "customer_edit";
@@ -38,7 +38,6 @@ public class CustomerController {
 
 	@GetMapping("/customers/addCustomer")
 	private String addCustomer(Model model ){
-		//todo add norm handling
 		Customer customer = new Customer();
 		model.addAttribute("customer", customer);
 		return "customer_edit";

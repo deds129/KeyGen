@@ -111,8 +111,8 @@ public class LicenseKey {
 				", host='" + host + '\'' +
 				", port=" + port +
 				", comment='" + comment + '\'' +
-				", startDate='" + new SimpleDateFormat("yyyy-MM-dd").format(startDate) + '\'' +
-				", endDate='" +  new SimpleDateFormat("yyyy-MM-dd").format(endDate) + '\'' +
+				", startDate='" + (startDate == null ? "" : new SimpleDateFormat("yyyy-MM-dd").format(startDate) ) + '\'' +
+				", endDate='" + (endDate == null ? "" : new SimpleDateFormat("yyyy-MM-dd").format(endDate)) + '\'' +
 				", features=" + Arrays.toString(features.stream().map(Feature::getFeatureTitle).toArray()) +
 				", dbTypes=" + Arrays.toString(dbTypes.stream().map(DbType::getDbTitle).toArray()) +
 				", osTypes=" + Arrays.toString(osTypes.stream().map(OsType::getOsTitle).toArray()) +

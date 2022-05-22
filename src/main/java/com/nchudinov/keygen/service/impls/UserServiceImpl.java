@@ -2,6 +2,7 @@ package com.nchudinov.keygen.service.impls;
 
 import com.nchudinov.keygen.model.User;
 import com.nchudinov.keygen.repository.UserRepository;
+import org.mapstruct.control.MappingControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,9 +22,16 @@ public class UserServiceImpl implements UserDetailsService {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
-	public void save(User user) {
+	public boolean save(User user) {
+		User userFromDb = userRepository.getById(user.getId());
+		
+		if (userFromDb != null) {
+			return false;
+		}
+		
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
+		return true;
 	}
 	
 	public List<User> findAll() {
