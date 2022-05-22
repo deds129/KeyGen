@@ -74,8 +74,8 @@ public class UserController {
 				file.transferTo(new File(uploadPath + "/" + resultFilename));
 				user.setFileName(resultFilename);
 			}
+			userService.save(user);
 		}
-		userService.save(user);
 		return "redirect:/users";
 	}
 	
