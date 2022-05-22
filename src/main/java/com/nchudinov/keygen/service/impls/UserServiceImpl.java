@@ -17,11 +17,8 @@ public class UserServiceImpl implements UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public User findUserByUsername(String username) {
-		return userRepository.findByUsername(username);
-	}
-	
 	public void save(User user) {
+		
 		userRepository.save(user);
 	}
 	

@@ -31,9 +31,8 @@ public class User implements UserDetails {
 	@Length(min = 8, message = "Minimum password length is 8 characters")
 	private String password;
 	
-	@Length(min = 8, message = "Minimum password length is 8 characters")
 	@Transient
-	private String password2;
+	private String passwordConfirm;
 	
 	private boolean active;
 	
@@ -42,7 +41,8 @@ public class User implements UserDetails {
 	@Email(message = "Email is not correct")
 	@NotBlank(message = "Username cannot be empty")
 	private String email;
-	
+
+	@Length(min = 10, max = 11, message = "Phone number must be in [10-11] characters long")
 	@NotBlank(message = "Phone number cannot be empty")
 	private String phoneNumber;
 	
@@ -151,11 +151,11 @@ public class User implements UserDetails {
 		this.fileName = avatar;
 	}
 
-	public String getPassword2() {
-		return password2;
+	public String getPasswordConfirm() {
+		return passwordConfirm;
 	}
 
-	public void setPassword2(String password2) {
-		this.password2 = password2;
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
 	}
 }

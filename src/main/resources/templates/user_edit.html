@@ -78,8 +78,7 @@
 										   placeholder="Enter user password">
 									<small>
 										<div class="alert alert-danger" th:if="${#fields.hasErrors('password')}"
-											 th:errors="*{password}">Password error!
-										</div>
+											 th:errors="*{password}"></div>
 									</small>
 									<small id="passwordHelp" class="form-text text-muted">
 										Your password must be 8-20 characters long, contain letters and numbers, and
@@ -91,12 +90,13 @@
 									<label for="confirmPasswordInput">Confirm new Password Password</label>
 									<!--mock data -->
 									<input type="password" class="form-control" id="confirmPasswordInput"
-										   value="" aria-describedby="confirmHelp"
+										   th:field="*{passwordConfirm}" aria-describedby="passwordHelp"
 										   placeholder="Confirm password">
+									
 									<small>
-										<div class="alert alert-danger" th:if="${#fields.hasErrors('password2')}"
-											 th:errors="*{password2}">Confirmation error!!!
-										</div>
+										<small>
+											<div class="alert alert-danger" th:if="${passwordError}" th:text="${passwordError}"></div>
+										</small>
 									</small>
 									<small id="confirmHelp" class="form-text text-muted">
 										Your password must be 8-20 characters long, contain letters and numbers, and

@@ -102,9 +102,18 @@ public class MainController {
 							  @Valid @ModelAttribute("license") LicenseKey licenseKey,
 							  Errors errors, //always before model
 							  Model model) {
+		
 		if (errors.hasErrors()) {
+			model.addAttribute("license",licenseKey);
 			return "license_edit";
-		} else {
+		} else if (licenseKey.getStartDate() != null && licenseKey.getEndDate() != null &&
+				licenseKey.getStartDate().after(licenseKey.getEndDate())) {
+			model.addAttribute("datesError","Start date cannot be after end date");
+			model.addAttribute("license",licenseKey);
+			return "license_edit";
+		}
+		
+		else {
 			Customer customer = licenseKey.getCustomer();
 			LicenseType licenseType = licenseKey.getLicenseType();
 

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -59,19 +57,23 @@ public class UserController {
 		if (errors != null && errors.hasErrors()) {
 			model.addAttribute("roles", Role.values());
 			return "user_edit";
-		}
-		
-		if (file != null && !file.getOriginalFilename().isEmpty()) {
-			File uploadDir = new File(uploadPath);
-			
-			if (!uploadDir.exists()) {
-				uploadDir.mkdir();
-			}
+		} else if (user.getPassword() != null && !user.getPassword().equals(user.getPasswordConfirm())) {
+			model.addAttribute("passwordError", "Passwords do not match");
+			model.addAttribute("roles", Role.values());
+			return "user_edit";
+		} else {
+			if (file != null && !file.getOriginalFilename().isEmpty()) {
+				File uploadDir = new File(uploadPath);
 
-			String fileNameUUID = UUID.randomUUID().toString();
-			String resultFilename = fileNameUUID + file.getOriginalFilename();
-			file.transferTo(new File(uploadPath + "/" + resultFilename));
-			user.setFileName(resultFilename);
+				if (!uploadDir.exists()) {
+					uploadDir.mkdir();
+				}
+
+				String fileNameUUID = UUID.randomUUID().toString();
+				String resultFilename = fileNameUUID + file.getOriginalFilename();
+				file.transferTo(new File(uploadPath + "/" + resultFilename));
+				user.setFileName(resultFilename);
+			}
 		}
 		userService.save(user);
 		return "redirect:/users";

@@ -31,13 +31,17 @@
 									th:value="${customer.id} "></option>
 						</select>
 					</label>
-					<!--small>
+				</div>
+
+				<div class="card-footer">
+					<small>
 						<div class="alert alert-danger" th:if="${#fields.hasErrors('customer.id')}"
 							 th:errors="*{customer.id}">
 							Please select option!
 						</div>
-					</small-->
+					</small>
 				</div>
+				
 			</div>
 
 			<div class="card">
@@ -50,6 +54,8 @@
 									th:value="${type.id}"></option>
 						</select>
 					</label>
+				</div>
+				<div class="card-footer">
 					<small>
 						<div class="alert alert-danger" th:if="${#fields.hasErrors('licenseType.id')}"
 							 th:errors="*{licenseType.id}">
@@ -70,6 +76,8 @@
 							</label>
 						</div>
 					</th:block>
+				</div>
+				<div class="card-footer">
 					<small>
 						<div class="alert alert-danger" th:if="${#fields.hasErrors('osTypes')}"
 							 th:errors="*{osTypes}">
@@ -91,6 +99,9 @@
 							</label>
 						</div>
 					</th:block>
+				</div>
+				
+				<div class="card-footer">
 					<small>
 						<div class="alert alert-danger" th:if="${#fields.hasErrors('dbTypes')}"
 							 th:errors="*{dbTypes}">
@@ -98,6 +109,7 @@
 						</div>
 					</small>
 				</div>
+				
 			</div>
 
 
@@ -112,6 +124,8 @@
 							</label>
 						</div>
 					</th:block>
+				</div>
+				<div class="card-footer">
 					<small>
 						<div class="alert alert-danger" th:if="${#fields.hasErrors('features')}"
 							 th:errors="*{features}">
@@ -136,14 +150,18 @@
 					</div>
 					<div class="form-group form-row">
 						<input class="form-control" type="number" th:field="*{port}" placeholder="Port"/>
-						<small>
-							<div class="alert alert-danger" th:if="${#fields.hasErrors('port')}"
-								 th:errors="*{port}">
-								Incorrect port range
-							</div>
-						</small>
 					</div>
 				</div>
+				
+				<div class="card-footer">
+					<small>
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('port')}"
+							 th:errors="*{port}">
+							Incorrect port range
+						</div>
+					</small>
+				</div>
+				
 			</div>
 
 			<div class="card">
@@ -165,6 +183,11 @@
 						</div>
 					</div>
 				</div>
+				
+				<div class="card-footer">
+					
+				</div>
+				
 				<!-- ---------------------------------------------------------------- -->
 			</div>
 
@@ -182,11 +205,16 @@
 							   placeholder="Select date"/>
 					</div>
 				</div>
+				<div class="card-footer">
+					<small>
+						<div class="alert alert-danger" th:if="${datesError}" th:text="${datesError}">
+						</div>
+					</small>
+				</div>
 			</div>
 
 		</div>
-
-
+		
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 </div>
