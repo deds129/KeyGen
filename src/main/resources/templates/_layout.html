@@ -73,6 +73,12 @@
 				</li>
 
 			</ul>
+			
+			<div class="navbar-text mr-3" th:text="${#authentication.name}">
+				username
+			</div>
+			<br>
+			
 			<form class="form-inline mt-2 mt-md-0" th:action="@{/logout}" method="post">
 				<input class="btn btn-primary" type="submit" value="Sign Out"/>
 			</form>
