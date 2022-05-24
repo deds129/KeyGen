@@ -106,12 +106,12 @@ public class MainController {
 		boolean datesError = true;
 		if (licenseKey.getStartDate() != null && licenseKey.getEndDate() != null) {
 			datesError = licenseKey.getStartDate().after(licenseKey.getEndDate());
-			if (!datesError) {
+			if (datesError) {
 				model.addAttribute("datesError","Start date cannot be after end date");
 			}
 		}
 		
-		if (errors.hasErrors() || !datesError ) {
+		if (errors.hasErrors() || datesError ) {
 			model.addAttribute("license",licenseKey);
 			return "license_edit";
 		} else {
@@ -160,10 +160,17 @@ public class MainController {
 							"Your license key: %s",
 					customer.getCustName(), licenseKey.getKey());
 
-			mailSender.sendMessage(customerMail, "License Key", message);
+			boolean isMsgSent =  mailSender.sendMessage(customerMail, "License Key", message);
+			//todo handle unsuccess mail sending
+			String msgStatus;
+			if (isMsgSent){
+				msgStatus = "success";
+			} else {
+				msgStatus = "unsuccess";
+			}
+			model.addAttribute("msg_status", msgStatus);
 		}
-		//must pass attribute with the same name
-		//model.addAttribute("success_message", licenseKey);
+		
 		return "redirect:/";
 	}
 }

@@ -7,6 +7,7 @@ import com.nchudinov.keygen.service.interfaces.LicenseKeyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,6 +24,9 @@ public class LicenseKeyServiceImpl implements LicenseKeyService {
 	@Override
 	public void saveLicenseKey(LicenseKey licenseKey) {
 		//generate unique key to entity
+		
+		//just server date now
+		licenseKey.setUpdateDate(new Date());
 		licenseKey.setKey(KeyGenerator.generateKey(licenseKey));
 		licenseKeyRepository.save(licenseKey);
 	}

@@ -51,6 +51,7 @@ public class LicenseKey {
 
 	@Min(value = 0, message = "Min value is 1")
 	@Max(value = 65535, message = "Max value is 65535")
+	@NotNull
 	@Column(name = "port")
 	private Integer port;
 	
@@ -68,6 +69,10 @@ public class LicenseKey {
 	@Column(name ="end_date")
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
+
+	@Column(name ="update_date")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date updateDate;
 	
 	@NotEmpty(message = "Choose at least one option")
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)

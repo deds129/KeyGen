@@ -45,6 +45,7 @@
 				<!--th scope="col">DB TYPES</th-->
 				<th scope="col">OS</th>
 				<th scope="col">DB TYPE</th>
+				<th scope="col">DATE</th>
 				<!--todo reformat -->
 				<th scope="col">OPTIONS</th>
 			</tr>
@@ -68,6 +69,7 @@
 				<!--td th:utext="${license.dbTypes}">Db types</td-->
 				<td th:utext="${license.getOsTitles()}">OS</td>
 				<td th:utext="${license.getDbTypeTitles()}">DB TYPE</td>
+				<td th:utext="${#dates.format(license.getUpdateDate(),'dd-MM-yyyy HH:mm')}">Update Date</td>
 
 				<!-- buttons block -->
 
