@@ -54,7 +54,7 @@ public class UserController {
 	private String saveUpdatedUser(@Valid User user, Errors errors,
 								   @RequestParam("file") MultipartFile file,
 								   Model model) throws IOException {
-		boolean pwdIsEqual = user.getPassword() != null && !user.getPassword().equals(user.getPasswordConfirm());
+		boolean pwdIsEqual = user.getPassword() != null || !user.getPassword().equals(user.getPasswordConfirm());
 		if (!pwdIsEqual) {
 			model.addAttribute("passwordError", "Passwords do not match");
 		}
@@ -76,7 +76,8 @@ public class UserController {
 			}
 			
 			if (!userService.save(user)) {
-				model.addAttribute("userError", "User exists!");
+				//model.addAttribute("userError", "User exists!");
+				//model.addAttribute("roles", Role.values());
 				return "user_edit";
 			}
 		}

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" lang="java">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="java">
 
 <head th:replace="_layout :: html_head">
 	<title>License keys</title>
@@ -111,6 +111,7 @@
 						</div>
 
 						<!-- can be replaced by GET requests -->
+						<div sec:authorize="hasRole('ROLE_ADMIN')">
 						<form name="license" th:action="@{/deleteLicense}" method="post">
 							<input type="hidden" name="licId" th:value="${license.id}"/>
 							<button type="submit" class="btn btn-outline-danger">
@@ -118,6 +119,7 @@
 									 height="16">
 							</button>
 						</form>
+						</div>
 
 						<form name="license" th:action="@{/updateLicense}" method="post">
 							<input type="hidden" name="licId" th:value="${license.id}"/>

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="java">
 
 
 <head th:fragment="html_head">
@@ -63,10 +63,12 @@
 				<li class="nav-item">
 					<a class="nav-link" href="#">My Page</a>
 				</li>
-				
+
+				<div sec:authorize="hasRole('ROLE_ADMIN')">
 				<li class="nav-item">
 					<a class="nav-link" href="/users">Admin Page</a>
 				</li>
+				</div>
 
 				<li class="nav-item">
 					<a class="nav-link" href="/customers">Customers</a>

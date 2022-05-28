@@ -23,12 +23,6 @@ public class UserServiceImpl implements UserDetailsService {
 	PasswordEncoder passwordEncoder;
 	
 	public boolean save(User user) {
-		User userFromDb = userRepository.getById(user.getId());
-		
-		if (userFromDb != null) {
-			return false;
-		}
-		
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userRepository.save(user);
 		return true;
