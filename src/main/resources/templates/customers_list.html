@@ -1,4 +1,4 @@
-<html lang="java" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="java">
 
 <head th:replace="_layout :: html_head">
 	<title>Customers</title>
@@ -19,7 +19,9 @@
 			<th scope="col">EMAIL</th>
 			<th scope="col">PHONE</th>
 			<th scope="col">SITE</th>
-			<th scope="col">OPTIONS</th>
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<th scope="col">OPTIONS</th>
+			</div>
 			<!--th scope="col">KEYS</th-->
 		</tr>
 		</thead>
@@ -31,14 +33,17 @@
 			<td th:utext="${customer.custEmail}">EMAIL</td>
 			<td th:utext="${customer.custPhone}">TEL</td>
 			<td th:utext="${customer.custWebsite}">SITE</td>
-			<td>
-				<a class="btn btn-info" th:href="@{/customers/{id}(id = ${customer.id})}" role="button">Edit</a>
-				<!-- user deleting supported by post request -->
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<td>
+					<a class="btn btn-info" th:href="@{/customers/{id}(id = ${customer.id})}" role="button">Edit</a>
+					<!-- user deleting supported by post request -->
 
-				<a class="btn btn-danger" th:href="@{/customers/deleteCustomer/{id}(id = ${customer.id})}"
-				   role="button">Delete</a>
-			</td>
+					<a class="btn btn-danger" th:href="@{/customers/deleteCustomer/{id}(id = ${customer.id})}"
+					   role="button">Delete</a>
+				</td>
+			</div>
 		</tr>
+
 
 	</table>
 	<!--todo: button or input -->

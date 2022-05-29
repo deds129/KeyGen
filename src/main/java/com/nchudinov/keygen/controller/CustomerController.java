@@ -3,6 +3,7 @@ package com.nchudinov.keygen.controller;
 import com.nchudinov.keygen.model.Customer;
 import com.nchudinov.keygen.service.interfaces.CustomersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -20,13 +21,14 @@ public class CustomerController {
 	private CustomersService customersService;
 	
 	@GetMapping("/customers")
-	private String customerList(Model model) {
+	public String customerList(Model model) {
 		model.addAttribute("customers", customersService.getAllCustomers());
 		return "customers_list";
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/customers/{custId}")
-	private String editCustomer(@PathVariable("custId") int id, Model model ){
+	public String editCustomer(@PathVariable("custId") int id, Model model ){
 		//todo add norm handling
 		Customer customer = customersService.getCustomerById(id);
 		if (customer == null) {
@@ -37,14 +39,14 @@ public class CustomerController {
 	}
 
 	@GetMapping("/customers/addCustomer")
-	private String addCustomer(Model model ){
+	public String addCustomer(Model model ){
 		Customer customer = new Customer();
 		model.addAttribute("customer", customer);
 		return "customer_edit";
 	}
 	
 	@PostMapping("/saveCustomer")
-	private String updateCustomer(@ModelAttribute("customer") @Valid Customer customer, Errors errors, Model model) {
+	public String updateCustomer(@ModelAttribute("customer") @Valid Customer customer, Errors errors, Model model) {
 		
 		if (errors != null && errors.hasErrors()) {
 			return "customer_edit";
@@ -54,6 +56,7 @@ public class CustomerController {
 	}
 
 	//delete customer using GET request
+	@PreAuthorize("hasRole('ROLE_ADMIN')") // - it cause npl???
 	@GetMapping("customers/deleteCustomer/{custId}")
 	public String  deleteCustomer(@PathVariable("custId") int id, Model model ) {
 		customersService.deleteCustomerId(id);

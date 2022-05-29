@@ -5,6 +5,7 @@ import com.nchudinov.keygen.model.User;
 import com.nchudinov.keygen.service.impls.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -17,7 +18,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Controller
-
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class UserController {
 	
 	@Value("${upload.path}")
@@ -27,13 +28,13 @@ public class UserController {
 	private UserServiceImpl userService;
 	
 	@GetMapping("/users")
-	private String userList(Model model){
+	public String userList(Model model){
 		model.addAttribute("users", userService.findAll());
 		return "users_list";
 	}
 	
 	@GetMapping("/users/{usrId}")
-	private String editUser(@PathVariable("usrId") long id, Model model ){
+	public String editUser(@PathVariable("usrId") long id, Model model ){
 		User user = userService.loadUserById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 		
@@ -51,7 +52,7 @@ public class UserController {
 	}
 
 	@PostMapping("/saveUser")
-	private String saveUpdatedUser(@Valid User user, Errors errors,
+	public String saveUpdatedUser(@Valid User user, Errors errors,
 								   @RequestParam("file") MultipartFile file,
 								   Model model) throws IOException {
 		boolean pwdIsEqual = user.getPassword() != null || !user.getPassword().equals(user.getPasswordConfirm());

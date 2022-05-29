@@ -1,6 +1,5 @@
 package com.nchudinov.keygen.service.impls;
 
-import com.nchudinov.keygen.mappers.CustomerMapper;
 import com.nchudinov.keygen.model.Customer;
 import com.nchudinov.keygen.repository.CustomersRepository;
 import com.nchudinov.keygen.service.interfaces.CustomersService;
@@ -14,9 +13,6 @@ public class CustomersServiceImpl implements CustomersService {
 	
 	@Autowired
 	private CustomersRepository customersRepository;
-	
-	@Autowired
-	private CustomerMapper customerMapper;
 	
 	@Override
 	public List<Customer> getAllCustomers() {

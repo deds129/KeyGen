@@ -5,6 +5,8 @@ import com.nchudinov.keygen.service.impls.CustomersServiceImpl;
 import com.nchudinov.keygen.service.impls.MailSender;
 import com.nchudinov.keygen.service.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -133,6 +135,7 @@ public class MainController {
 
 
 	@PostMapping("/deleteLicense")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String deleteLicense(@RequestParam("licId") int id, Model model) {
 		licenseKeyService.deleteLicenseById(id);
 		return "redirect:/";
