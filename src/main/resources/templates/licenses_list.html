@@ -145,6 +145,16 @@
 		</table>
 	</div>
 
+	<nav aria-label="Page navigation example">
+		Total Items [[${totalItems}]] : Page [[${currentPage}]] of [[${totalPages}]]
+		<ul class="pagination justify-content-center">
+			
+			<li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
+				<a class="page-link"th:href="@{'/page/' + ${i}}" th:text="${i}"></a>
+			</li>
+		</ul>
+	</nav>
+
 	<div>
 		<button type="button" class="btn btn-outline-danger" onclick="window.location.href = 'addLicense'">Add new
 			License Key

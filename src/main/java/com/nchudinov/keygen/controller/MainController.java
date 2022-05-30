@@ -5,6 +5,7 @@ import com.nchudinov.keygen.service.impls.CustomersServiceImpl;
 import com.nchudinov.keygen.service.impls.MailSender;
 import com.nchudinov.keygen.service.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -43,16 +44,31 @@ public class MainController {
 	
 	@GetMapping("/")
 	public String show(@RequestParam(required = false) String searchStr, Model model) {
-		List<LicenseKey> licenseKeys = new ArrayList<>();
+		return showOnePage(searchStr,model,1);
+	}
+	
+	@GetMapping("/page/{pageNumber}")
+	public String showOnePage(@RequestParam(required = false) String searchStr, Model model, @PathVariable("pageNumber") int currentPage) {
+		
+		Page<LicenseKey> licenseKeyPage;
 		
 		if (searchStr != null && !searchStr.isEmpty()) {
-			licenseKeys = licenseKeyService.getKeysByCustomer(searchStr);
+			licenseKeyPage = licenseKeyService.findPageByCustomer(searchStr, currentPage);
 		} else {
-			licenseKeys = licenseKeyService.getAllKeys();
+			licenseKeyPage = licenseKeyService.findPage(currentPage);
 		}
-		
+
+		int totalPages = licenseKeyPage.getTotalPages();
+		long totalItems = licenseKeyPage.getTotalElements();
+
+		List<LicenseKey> licenseKeys = licenseKeyPage.getContent();
+
 		model.addAttribute("allLicenses", licenseKeys);
 		model.addAttribute("searchStr", searchStr);
+		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("currentPage", totalPages);
+		model.addAttribute("totalItems", totalItems);
+		
 		return "licenses_list";
 	}
 	
