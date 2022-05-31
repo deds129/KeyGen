@@ -66,7 +66,7 @@ public class MainController {
 		model.addAttribute("allLicenses", licenseKeys);
 		model.addAttribute("searchStr", searchStr);
 		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("currentPage", totalPages);
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("totalItems", totalItems);
 		
 		return "licenses_list";

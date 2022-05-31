@@ -146,12 +146,35 @@
 	</div>
 
 	<nav aria-label="Page navigation example">
-		Total Items [[${totalItems}]] : Page [[${currentPage}]] of [[${totalPages}]]
+		<small class="text-muted">Total Items [[${totalItems}]] : Page [[${currentPage}]] of [[${totalPages}]]</small>
+		
 		<ul class="pagination justify-content-center">
-			
-			<li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
-				<a class="page-link"th:href="@{'/page/' + ${i}}" th:text="${i}"></a>
+			<li class="page-item">
+				<a class="page-link" th:href="@{'/page/1'}">First</a>
 			</li>
+			
+			<li class="page-item" th:classappend="${currentPage == 1 ? ' disabled' : ''}">
+				<a class="page-link" th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1}}">
+					Previous
+				</a>
+				
+			</li>
+			<li class="page-item" th:classappend="${currentPage == i ? ' active' : ''}"
+				th:each="i : ${#numbers.sequence(1, totalPages)}">
+				<a class="page-link" th:href="@{'/page/' + ${i}}" th:text="${i}">
+				</a>
+			</li>
+
+			<li class="page-item" th:classappend="${currentPage == totalPages ? ' disabled' : ''}">
+				<a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">
+					Next
+				</a>
+			</li>
+			
+			<li class="page-item">
+				<a class="page-link" th:href="@{'/page/' + ${totalPages}}">Last</a>
+			</li>
+			
 		</ul>
 	</nav>
 
