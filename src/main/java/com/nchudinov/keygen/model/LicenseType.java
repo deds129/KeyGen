@@ -1,5 +1,6 @@
 package com.nchudinov.keygen.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,8 @@ public class LicenseType {
 	@Type(type = "org.hibernate.type.TextType")
 	@Column(name = "type_title", nullable = false)
 	private String typeTitle;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "licenseType")
 	private Set<LicenseKey> licenseKeys = new LinkedHashSet<>();
 }

@@ -1,5 +1,6 @@
 package com.nchudinov.keygen.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class OsType {
 	@Column(name = "os_title", nullable = false)
 	private String osTitle;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "os_to_key",
 			joinColumns = @JoinColumn(name = "os_id"),

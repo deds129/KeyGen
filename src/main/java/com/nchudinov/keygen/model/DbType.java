@@ -1,5 +1,6 @@
 package com.nchudinov.keygen.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class DbType {
 	@Column(name = "db_title", nullable = false)
 	private String dbTitle;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "db_to_key",
 			joinColumns = @JoinColumn(name = "db_type"),

@@ -1,5 +1,6 @@
 package com.nchudinov.keygen.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class Feature {
 	@Column(name = "feature_title", nullable = false)
 	private String featureTitle;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "feature_to_key",
 			joinColumns = @JoinColumn(name = "feature_id"),
