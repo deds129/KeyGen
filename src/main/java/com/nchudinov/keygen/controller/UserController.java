@@ -71,7 +71,7 @@ public class UserController {
 				}
 
 				String fileNameUUID = UUID.randomUUID().toString();
-				String resultFilename = fileNameUUID + file.getOriginalFilename();
+				String resultFilename = fileNameUUID + "."  + file.getOriginalFilename();
 				file.transferTo(new File(uploadPath + "/" + resultFilename));
 				user.setFileName(resultFilename);
 			}

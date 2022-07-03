@@ -58,7 +58,7 @@
 							<div class="mb-3">
 								<label for="loginInput">Login</label>
 								<input type="text" class="form-control" id="loginInput" th:field="*{username}"
-									   aria-describedby="loginHelp" placeholder="Enter user login">
+									   aria-describedby="loginHelp" placeholder="Enter login">
 								<small>
 									<div class="alert alert-danger" th:if="${#fields.hasErrors('username')}"
 										 th:errors="*{username}"></div>
@@ -80,7 +80,7 @@
 									<label for="passwordInput">Password</label>
 									<input type="password" class="form-control" id="passwordInput"
 										   th:field="*{password}" aria-describedby="passwordHelp"
-										   placeholder="Enter user password">
+										   placeholder="Enter password">
 									<small>
 										<div class="alert alert-danger" th:if="${#fields.hasErrors('password')}"
 											 th:errors="*{password}"></div>
@@ -92,7 +92,7 @@
 								</div>
 
 								<div class="col-md-6">
-									<label for="confirmPasswordInput">Confirm new Password Password</label>
+									<label for="confirmPasswordInput">Confirm Password</label>
 									<!--mock data -->
 									<input type="password" class="form-control" id="confirmPasswordInput"
 										   th:field="*{passwordConfirm}" aria-describedby="passwordHelp"
@@ -117,7 +117,7 @@
 								<div class="col-md-6">
 									<label for="emailInput">Email</label>
 									<input type="email" class="form-control" id="emailInput" th:field="*{email}"
-										   aria-describedby="emailHelp" placeholder="Enter user login">
+										   aria-describedby="emailHelp" placeholder="Enter email">
 									<small>
 										<div class="alert alert-danger" th:if="${#fields.hasErrors('email')}"
 											 th:errors="*{email}">
@@ -131,10 +131,10 @@
 
 								<div class="col-md-6">
 									<!-- Form phone-->
-									<label for="phoneInput">Phone</label>
+									<label for="phoneInput">Phone number</label>
 									<input type="tel" class="form-control" id="phoneInput"
 										   th:field="*{phoneNumber}" aria-describedby="loginHelp"
-										   placeholder="Enter user phone number">
+										   placeholder="Enter phone number">
 									<small>
 										<div class="alert alert-danger" th:if="${#fields.hasErrors('phoneNumber')}"
 											 th:errors="*{phoneNumber}">
