@@ -1,5 +1,6 @@
 package com.nchudinov.keygen.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
@@ -41,7 +42,8 @@ public class Customer {
 	@NotBlank(message = "Customer company name cannot be empty")
 	@Column(name = "company_name")
 	private String custCompName;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "customer")
 	private Set<LicenseKey> licenseKeys = new LinkedHashSet<>();
 	
