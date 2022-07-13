@@ -1,27 +1,27 @@
-drop table flyway_schema_history;
+drop table if exists flyway_schema_history;
 
-drop table db_to_key;
+drop table if exists db_to_key;
 
-drop table db_types;
+drop table if exists db_types;
 
-drop table feature_to_key;
+drop table if exists feature_to_key;
 
-drop table features;
+drop table if exists features;
 
-drop table os_to_key;
+drop table if exists os_to_key;
 
-drop table license_keys;
+drop table if exists license_keys;
 
-drop table customers;
+drop table if exists customers;
 
-drop table license_types;
+drop table if exists license_types;
 
-drop table os_types;
+drop table if exists os_types;
 
-drop table user_role;
+drop table if exists user_role;
 
-drop table usr;
+drop table if exists usr;
 
-drop sequence hibernate_sequence;
+drop sequence if exists  hibernate_sequence;
 
 

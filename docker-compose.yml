@@ -1,19 +1,21 @@
-
-  version:'3'
+version: '3'
 services:
   postgres:
     image: 'postgres:13'
-    container_name: 'java_postgres:latest'
-    enviroment:
+    restart: always
+    ports:
+      - "5432:5432"
+    container_name: 'java_postgres'
+    environment: 
       - 'POSTGRES_USER=postgres'
       - 'POSTGRES_PASSWORD=postgres'
       - 'POSTGRES_DB=keygen'
-    volumes:
-      - .:/docker-entrypoint-initdb.d
-      ports:
-        - "5432:5432"
-  app :
-    build: ./
-    container_name: 'java_app'
-      ports:
-        - "8080:8080"
+  app:
+   build: ./
+   container_name: 'java_app'
+   depends_on:
+     - postgres
+   ports:
+     - "8080:8080"
+   volumes:
+     - "/var/lib/postgresql/data"
